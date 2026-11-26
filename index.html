@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hype HUD</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2020%2020%22%20shape-rendering%3D%22crispEdges%22%3E%3Crect%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22%234B3A9E%22/%3E%3Crect%20x%3D%224%22%20y%3D%222%22%20width%3D%2212%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%2214%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%222%22%20y%3D%224%22%20width%3D%2210%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%2216%22%20y%3D%224%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%222%22%20y%3D%225%22%20width%3D%2210%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%2216%22%20y%3D%225%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%222%22%20y%3D%226%22%20width%3D%2210%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%2216%22%20y%3D%226%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%222%22%20y%3D%227%22%20width%3D%2210%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%2216%22%20y%3D%227%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%222%22%20y%3D%228%22%20width%3D%2216%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%222%22%20y%3D%229%22%20width%3D%226%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%2211%22%20y%3D%229%22%20width%3D%227%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%222%22%20y%3D%2210%22%20width%3D%226%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%2211%22%20y%3D%2210%22%20width%3D%227%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%222%22%20y%3D%2211%22%20width%3D%226%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%2211%22%20y%3D%2211%22%20width%3D%227%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%222%22%20y%3D%2212%22%20width%3D%2216%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%222%22%20y%3D%2213%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%227%22%20y%3D%2213%22%20width%3D%2211%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%222%22%20y%3D%2214%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%227%22%20y%3D%2214%22%20width%3D%2211%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%222%22%20y%3D%2215%22%20width%3D%2216%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%222%22%20y%3D%2216%22%20width%3D%2215%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3Crect%20x%3D%222%22%20y%3D%2217%22%20width%3D%2214%22%20height%3D%221%22%20fill%3D%22%23B9A6FF%22/%3E%3C/svg%3E">
+<style>
+:root{--bg:#000;--card:rgba(27,24,38,.80);--vio:#b9a6ff;--vio-hi:#e9e3ff;--ink:#f5f5f7;--mute:#aeaeb6;--line:rgba(226,216,255,.14);--accent:#f5f5f7;--accent-soft:rgba(255,255,255,.1);
+--want:#2ecc8a;--hesitant:#f0aa3c;--critical:#f05a5a;--unclear:#7d8aa0;--offtopic:rgba(255,255,255,.14);--radius:22px;
+--mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,"PingFang SC","Microsoft YaHei",Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+#batch,#detail,#compare,#comments,#method,#channel,#fake,.tabbar{scroll-margin-top:76px}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+#code{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;image-rendering:pixelated;image-rendering:crisp-edges;opacity:.4}
+.veil{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 90% at 50% 30%,rgba(0,0,0,.9),rgba(0,0,0,0) 100%)}
+header,main{position:relative;z-index:1}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(255,255,255,.3);text-underline-offset:3px}a:hover{text-decoration-color:#fff}
+header{position:sticky;top:0;z-index:5;background:rgba(0,0,0,.55);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+.wrap{max-width:1220px;margin:0 auto;padding:0 24px}
+.top{display:flex;align-items:center;justify-content:space-between;height:58px;gap:12px}
+.brand{font:600 15px var(--mono);letter-spacing:.02em;display:flex;align-items:center;gap:9px}.brand i{width:14px;height:14px;background:conic-gradient(#fff 25%,transparent 0 50%,var(--vio) 0 75%,transparent 0);display:block}.brand span{color:var(--mute)}
+.top nav{display:flex;align-items:center;gap:18px}
+.top nav a{color:var(--mute);font-size:13.5px;text-decoration:none}.top nav a:hover{color:var(--ink)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font:12px var(--mono)}
+.lang button{background:none;border:0;color:var(--mute);padding:5px 11px}
+.lang button.on{background:var(--vio-hi);color:#14101f}
+@media(max-width:720px){.top nav a{display:none}}
+main{padding:72px 0 90px}
+.prompt{font:13px var(--mono);color:var(--ink);margin-bottom:18px;opacity:.85}
+.prompt b{color:var(--vio);font-weight:400}
+h1{font-size:52px;font-weight:600;line-height:1.08;margin:0 0 18px;letter-spacing:-.035em;max-width:860px}
+h1 .cur{display:inline-block;width:.09em;height:.86em;border-radius:2px;background:var(--vio);margin-left:8px;vertical-align:-.08em;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media(max-width:720px){h1{font-size:34px}}
+h2{font-size:17px;margin:0 0 16px;font-weight:600;letter-spacing:-.01em}
+.hrow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.hrow h2{margin:0}
+.ghost{border:1px solid var(--line);background:rgba(255,255,255,.06);border-radius:999px;padding:5px 14px;font-size:13px;white-space:nowrap}.ghost:hover{background:rgba(255,255,255,.14)}
+.sub{color:#d1d1d6;margin:0 0 16px;max-width:680px;font-size:18px;line-height:1.5}
+.by{font:13px var(--mono);color:var(--mute);margin:0 0 40px}.by a{color:var(--ink)}
+.card{background:var(--card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:var(--radius);padding:26px;margin-bottom:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+input[type=text],input[type=password]{flex:1;min-width:240px;height:46px;border:1px solid var(--line);border-radius:14px;padding:0 16px;font:15px var(--sans);background:rgba(0,0,0,.35);color:var(--ink)}
+input.fee{flex:none;min-width:0;width:78px;height:30px;border-radius:8px;padding:0 8px;font:13px var(--mono);text-align:right}
+input[type=text]::placeholder,input[type=password]::placeholder{color:#6e6e76}
+input[type=text]:focus,input[type=password]:focus{outline:3px solid rgba(185,166,255,.22);border-color:rgba(200,185,255,.7)}
+button{font:inherit;cursor:pointer;color:inherit}
+.btn{height:46px;padding:0 26px;border:0;border-radius:999px;background:var(--vio-hi);color:#14101f;font-weight:600}
+.btn:hover{background:#fff}
+.msg{margin-top:10px;font-size:14px;color:var(--mute);min-height:20px}
+.quota{font:12.5px var(--mono);color:var(--mute)}
+.imp{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--mute)}
+.drag .card:first-of-type{outline:2px dashed rgba(255,255,255,.5)}
+.bsum{display:flex;gap:18px;flex-wrap:wrap;font-size:14.5px;margin-bottom:14px}.bsum b{font-weight:600}
+.bmap{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:14px;color:var(--mute);margin-bottom:14px}
+select{height:34px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.35);color:var(--ink);font:14px var(--sans);padding:0 8px;max-width:220px}
+.bbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.bbtns .btn{height:40px}.btn:disabled{opacity:.35;cursor:default}
+.bscroll{max-height:380px;overflow:auto;border:1px solid var(--line);border-radius:14px}
+.bscroll table{font-size:14px}.bscroll th{position:sticky;top:0;background:#1b1b1e;cursor:default;text-align:left}.bscroll td{text-align:left;padding:9px 10px;cursor:default}
+.bscroll tbody tr{cursor:default}.bscroll td.u{max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:12.5px var(--mono);color:var(--mute)}
+.st{white-space:nowrap}.st.done,.st.have{color:#63e2ab}.st.error{color:#ff9c9c}.st.running{color:#f3bd63}.st.dup,.st.channel,.st.platform,.st.ytother{color:var(--mute)}
+.rk{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media(max-width:820px){.rk{grid-template-columns:1fr}}
+.rr{display:grid;grid-template-columns:12px 1fr;gap:10px;align-items:start;width:100%;text-align:left;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+button.rr:hover{background:rgba(255,255,255,.1)}
+.rr .lv{width:10px;height:10px;border-radius:50%;margin-top:6px;background:#6e6e76}.rr .lv.ok{background:var(--want)}.rr .lv.watch{background:var(--hesitant)}.rr .lv.flag{background:var(--critical)}
+.rr b{display:block;font-weight:600;font-size:14.5px}.rr span{font-size:13.5px;color:var(--mute)}
+.glow{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(900px 420px at 28% -4%,rgba(150,120,255,.22),transparent 72%),radial-gradient(520px 380px at 22% 34%,rgba(150,120,255,.20),transparent 70%),radial-gradient(620px 420px at 78% 62%,rgba(190,150,255,.14),transparent 70%)}
+.card.key{background:linear-gradient(140deg,rgba(210,196,255,.29),rgba(170,150,255,.17) 55%,rgba(255,255,255,.08));border-color:rgba(214,200,255,.34);backdrop-filter:blur(30px) saturate(170%);-webkit-backdrop-filter:blur(30px) saturate(170%);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 18px 60px rgba(124,92,255,.14)}
+.card.key .meta,.card.key .note,.card.key .tile .d,.card.key .tile .k,.card.key .toggle,.card.key .ai,.card.key .rr span,.card.key .lgd{color:#ddd6f3}
+.card.key2{background:linear-gradient(140deg,rgba(210,196,255,.16),rgba(170,150,255,.09) 55%,rgba(255,255,255,.04));border-color:rgba(214,200,255,.22);backdrop-filter:blur(30px) saturate(150%);-webkit-backdrop-filter:blur(30px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
+.card.key2 .note,.card.key2 .cmp td.usual,.card.key2 th{color:#cfc9e2}
+.card.key .tile,.card.key .rr{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.18)}
+.card.key .verdict{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.24)}.card.key .verdict span{color:#e4dcff}
+.card.key .ghost{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.26)}
+.card.key .nb{font-size:16px}.card.key h2{font-size:18px}
+.tile{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;min-height:132px}
+.tile .k{height:16px;line-height:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.tile .d{line-height:1.45}
+.tabbar{margin:8px 0 18px}
+.tabs{display:flex;gap:4px;padding:5px;border-radius:999px;background:rgba(200,185,255,.09);border:1px solid var(--line);width:max-content;max-width:100%;overflow-x:auto}
+.fd{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;background:#6e6e76;vertical-align:1px}.fd.ok{background:var(--want)}.fd.watch{background:var(--hesitant)}.fd.flag{background:var(--critical)}
+.lt{display:inline-flex;align-items:center;gap:6px;font:600 11.5px var(--sans);font-style:normal;padding:2px 9px;border-radius:999px;margin-left:8px;vertical-align:1px;background:rgba(255,255,255,.1);color:#c7c7cc;white-space:nowrap}
+.lt::before{content:"";width:7px;height:7px;border-radius:50%;background:#8e8e96}
+.lt.ok{background:rgba(46,204,138,.18);color:#7be8b8}.lt.ok::before{background:var(--want)}
+.lt.watch{background:rgba(240,170,60,.2);color:#f6c877}.lt.watch::before{background:var(--hesitant)}
+.lt.flag{background:rgba(240,90,90,.22);color:#ffa3a3}.lt.flag::before{background:var(--critical)}
+.mgo{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);font-size:14px;color:var(--mute)}.card{scroll-margin-top:76px}
+.bench{margin:4px 0 14px;padding:14px 16px;border-radius:14px;background:rgba(0,0,0,.28);border:1px solid var(--line)}
+.bench table{font-size:13.5px}.bench th,.bench td{text-align:left!important;cursor:default;vertical-align:top;padding:9px 8px;white-space:normal}.bench tbody tr{cursor:default}.bench tbody tr:hover{background:none}
+.bench td:first-child{font-weight:600;white-space:nowrap}.bench td:nth-child(n+3):nth-child(-n+5){min-width:104px}.bench td.how{color:#d6d1e6;min-width:200px}.bench td.src{color:#cfc9e2;min-width:230px}.bench p{font-size:13px;color:#cfc9e2;margin:10px 0 0}
+.bz{display:inline-block;font:600 11px var(--sans);font-style:normal;padding:1px 7px;border-radius:999px;margin-right:6px;background:rgba(255,255,255,.12);color:#d9d9de}.bz.ref{background:rgba(185,166,255,.24);color:#ddd3ff}.bz.off{background:rgba(46,204,138,.18);color:#7be8b8}
+.lgd2{display:flex;gap:6px 14px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--mute);margin:0 0 12px}.lgd2 .lt{margin-left:0}
+.rr{grid-template-columns:1fr!important}
+.cmp{width:100%;border-collapse:collapse;font-size:15px}.cmp th{text-align:left;cursor:default}.cmp td{text-align:left;padding:13px 7px;vertical-align:middle}
+.cmp td.num{font:600 20px var(--sans);letter-spacing:-.01em}.cmp td.usual{color:var(--mute);font-size:16px}.cmp tbody tr{cursor:default}.cmp tbody tr:hover{background:none}
+.lead{font-size:17px;line-height:1.5;margin:0 0 14px}
+.fk{display:flex;gap:16px;align-items:center;padding:20px 22px;border-radius:18px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);margin-bottom:16px}
+.fk>i{flex:none;width:18px;height:18px;border-radius:50%;background:#8e8e96}
+.fk b{display:block;font-size:24px;font-weight:600;letter-spacing:-.02em;line-height:1.25}.fk span{display:block;font-size:14px;margin-top:4px;color:#e3def5}
+.fk.ok{background:rgba(46,204,138,.16);border-color:rgba(46,204,138,.55)}.fk.ok>i{background:var(--want)}
+.fk.watch{background:rgba(240,170,60,.16);border-color:rgba(240,170,60,.6)}.fk.watch>i{background:var(--hesitant)}
+.fk.flag{background:rgba(240,90,90,.18);border-color:rgba(240,90,90,.65)}.fk.flag>i{background:var(--critical)}
+.tabs button{border:0;background:none;color:var(--mute);padding:8px 20px;border-radius:999px;font-size:14.5px;font-weight:500;white-space:nowrap}
+.tabs button:hover{color:var(--ink)}.tabs button.on{background:var(--vio-hi);color:#14101f}
+.top nav a.on{color:var(--vio-hi)}
+.note{font-size:13px;color:var(--mute);margin-top:12px}
+.ai{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--mute);margin-top:12px}.ai b{flex:none;font:600 10.5px var(--mono);letter-spacing:.06em;color:#14101f;background:#cfc3ff;border-radius:5px;padding:2px 6px;margin-top:1px}
+.cm p.zh,.q p.zh{color:#c7c7cc;font-size:14.5px;border-left:2px solid rgba(255,255,255,.2);padding-left:10px}
+.fit .ql{font:500 10.5px var(--mono);letter-spacing:.05em;fill:#7a7a82}
+.port{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;color:var(--mute);margin:-4px 0 14px}.port b{color:var(--ink);font-weight:600}
+.qs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:820px){.qs{grid-template-columns:1fr}}
+.q{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.q p{margin:0;font-size:15px;line-height:1.55;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
+.q .tags{margin-top:auto}
+.road{margin:16px 0 0;padding:14px 0 0 20px;border-top:1px solid var(--line)}.method h3{font-size:14px;margin:18px 0 0;color:var(--ink)}
+.nb{margin:0;padding-left:20px;font-size:15.5px;line-height:1.6}.nb li{margin-bottom:8px}
+.mx{width:100%;border-collapse:separate;border-spacing:4px;font-size:13.5px}
+.mx th{font:600 11.5px var(--sans);text-transform:none;letter-spacing:0;color:var(--mute);text-align:center;padding:4px;border:0;white-space:normal;cursor:default;vertical-align:bottom}
+.mx th:first-child{text-align:left}.mx td{padding:0;border:0;text-align:center}.mx td:first-child{text-align:left;color:var(--ink);padding-right:10px;white-space:nowrap}
+.mx tbody tr{cursor:default}.mx tbody tr:hover{background:none}
+.mx button{width:100%;min-width:44px;height:36px;border:0;border-radius:8px;font:600 14px var(--mono)}.mx button:hover{outline:2px solid rgba(255,255,255,.6)}
+.mx .z{display:block;height:36px;line-height:36px;border-radius:8px;background:rgba(255,255,255,.03);color:#55555c}
+.chv{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}.chv th{text-align:left;cursor:default}.chv td{text-align:left;padding:9px 7px}.chv th:nth-child(n+3),.chv td:nth-child(n+3){text-align:right}
+.chv tbody tr{cursor:default}.chv td.tt{max-width:330px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chart svg{width:100%;height:auto;display:block}.lgd{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--mute);margin-top:8px}.lgd i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.sub2{font-size:15px;font-weight:600;margin:22px 0 10px}
+.fit{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.fit svg{width:100%;height:auto;display:block}.fit circle{cursor:pointer}
+.acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.rm{border:0;background:none;color:var(--mute);font-size:15px;padding:0 4px;margin-left:4px}.rm:hover{color:#ff9c9c}
+.cp{border:0;background:none;color:var(--mute);font-size:12px;padding:0;text-decoration:underline;text-underline-offset:2px}.cp:hover{color:var(--ink)}
+.prog{height:4px;border-radius:2px;background:rgba(255,255,255,.1);margin-top:14px;overflow:hidden}.prog i{display:block;height:100%;background:var(--vio);transition:width .3s}
+.notice{background:rgba(240,170,60,.1);border:1px solid rgba(240,170,60,.35);color:#f3c77e;border-radius:8px;padding:10px 14px;font-size:14px;margin-bottom:16px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{font:600 11px var(--sans);color:var(--mute);text-transform:uppercase;letter-spacing:.02em;text-align:right;padding:8px 7px;border-bottom:1px solid var(--line);white-space:nowrap;cursor:pointer;user-select:none}th:hover{color:var(--ink)}
+td{padding:13px 7px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+tbody tr{cursor:pointer}tbody tr:hover{background:rgba(255,255,255,.03)}tbody tr.on{background:rgba(185,166,255,.13);box-shadow:inset 3px 0 0 var(--vio)}
+tbody tr:last-child td{border-bottom:0}
+td .t{color:var(--mute);font-size:12.5px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.scroll{overflow-x:auto}
+.vhead{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.vhead h3{font-size:26px;font-weight:600;margin:0 0 6px;letter-spacing:-.02em}
+.verdict{margin-top:18px;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid var(--line);font-size:17px;line-height:1.5}.verdict span{display:block;font:500 11px var(--mono);color:var(--mute);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+.meta{color:var(--mute);font-size:14px}
+.badge{display:inline-block;font:500 11.5px var(--mono);padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.12);color:#e5e5ea;margin-left:8px;vertical-align:middle}
+.badge.warn{background:rgba(240,90,90,.15);color:#ff9c9c}
+.toggle{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--mute);white-space:nowrap}
+.toggle input{accent-color:var(--vio)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px}
+.tile{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:16px;padding:16px 18px;text-align:left;transition:background .15s,transform .15s}
+button.tile:hover{background:rgba(255,255,255,.11);transform:translateY(-1px)}
+.tile .k{font:500 11px var(--mono);color:var(--mute);text-transform:uppercase;letter-spacing:.04em}
+.tile .v{font:600 32px var(--sans);letter-spacing:-.03em;height:44px;line-height:44px;margin:8px 0 6px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tile .v.txt{font:600 16px/1.25 var(--sans);letter-spacing:0;height:44px;margin:8px 0 6px;padding:0;display:flex;align-items:center;white-space:normal}
+.tile .d{font-size:12.5px;color:var(--mute)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
+.stack{display:flex;height:14px;border-radius:999px;overflow:hidden;margin-bottom:12px;gap:2px}
+.stack button{border:0;padding:0;height:100%}
+.legend{display:grid;gap:2px}
+.lg,.bar{width:100%;background:none;border:0;padding:6px;border-radius:6px;text-align:left;font-size:14px}
+.lg{display:flex;align-items:center;gap:8px}
+.lg:hover,.bar:hover{background:rgba(255,255,255,.05)}
+.dot{width:10px;height:10px;border-radius:3px;flex:none}
+.lg .n,.bar .n{margin-left:auto;color:var(--mute);font:13px var(--mono)}
+.bar{display:grid;grid-template-columns:170px 1fr 40px;gap:10px;align-items:center}
+.bar i{display:block;height:6px;border-radius:3px;background:#f5f5f7}
+.bar .n{text-align:right}
+.empty{color:var(--mute);font-size:14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{border:1px solid var(--line);background:rgba(255,255,255,.06);border-radius:999px;padding:5px 13px;font-size:13px}
+.chip:hover{background:rgba(255,255,255,.14)}
+.chip.on{background:#f5f5f7;border-color:#f5f5f7;color:#000}
+.health{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 12px}@media(max-width:820px){.health{grid-template-columns:repeat(2,1fr)}}
+.health b{display:block;font:600 24px var(--sans);letter-spacing:-.02em}.health span{font-size:12.5px;color:var(--mute)}
+.cm{padding:13px 0;border-bottom:1px solid var(--line)}
+.cm:last-of-type{border-bottom:0}
+.cm p{margin:0 0 7px;font-size:15.5px;line-height:1.6;max-width:820px;white-space:pre-wrap;overflow-wrap:anywhere}
+.tags{display:flex;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--mute);align-items:center}
+.tag{padding:1px 8px;border-radius:999px;background:rgba(255,255,255,.07);color:#b9c3d3}
+.tag.want{background:rgba(46,204,138,.15);color:#63e2ab}.tag.hesitant{background:rgba(240,170,60,.15);color:#f3bd63}.tag.critical{background:rgba(240,90,90,.15);color:#ff9c9c}
+mark{background:rgba(255,214,90,.22);color:inherit;padding:0 2px;border-radius:2px}
+.more{margin-top:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);border-radius:999px;padding:8px 16px}
+.more:hover{background:rgba(255,255,255,.14)}
+.method{color:#c7c7cc;font-size:14.5px}.method ul{margin:0;padding-left:20px}.method li{margin-bottom:7px}
+footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--mute);font:12.5px var(--mono);margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}
+footer a{color:var(--ink)}
+
+/* ===== Hype HUD: daytime pixel theme ===== */
+:root{--bg:#b5e2ff;--card:#fffaf0;--ink:#1b1530;--mute:#5c5474;--line:#e3d8c0;--vio:#6a57c9;--vio-hi:#6a57c9;--accent:#1b1530;--offtopic:#d9d3c4;--unclear:#9a94a8;
+--px:'Press Start 2P',var(--sans);--pxs:'Pixelify Sans',var(--sans);--pxl:'Silkscreen',var(--mono)}
+*{border-radius:0!important}
+html{background:#b5e2ff}
+body{color:var(--ink);font-family:var(--pxs);font-size:17px;min-height:100vh;padding-bottom:64px;
+ background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%208%208%22%20shape-rendering%3D%22crispEdges%22%3E%3Crect%20width%3D%228%22%20height%3D%228%22%20fill%3D%22%23a8662e%22/%3E%3Crect%20width%3D%228%22%20height%3D%222%22%20fill%3D%22%234cbf4c%22/%3E%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%234cbf4c%22/%3E%3Crect%20x%3D%221%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%237d4a1f%22/%3E%3Crect%20x%3D%225%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%237d4a1f%22/%3E%3Crect%20x%3D%226%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23c98a4c%22/%3E%3C/svg%3E") left bottom/32px repeat-x,url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%2248%22%20viewBox%3D%220%200%2030%2012%22%20shape-rendering%3D%22crispEdges%22%20fill%3D%22%23fff%22%3E%3Crect%20x%3D%2210%22%20y%3D%220%22%20width%3D%228%22%20height%3D%222%22/%3E%3Crect%20x%3D%227%22%20y%3D%222%22%20width%3D%2214%22%20height%3D%222%22/%3E%3Crect%20x%3D%2220%22%20y%3D%223%22%20width%3D%225%22%20height%3D%222%22/%3E%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2224%22%20height%3D%224%22/%3E%3Crect%20x%3D%221%22%20y%3D%228%22%20width%3D%2228%22%20height%3D%223%22/%3E%3C/svg%3E") 92% 92px no-repeat,url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%2248%22%20viewBox%3D%220%200%2030%2012%22%20shape-rendering%3D%22crispEdges%22%20fill%3D%22%23fff%22%3E%3Crect%20x%3D%2210%22%20y%3D%220%22%20width%3D%228%22%20height%3D%222%22/%3E%3Crect%20x%3D%227%22%20y%3D%222%22%20width%3D%2214%22%20height%3D%222%22/%3E%3Crect%20x%3D%2220%22%20y%3D%223%22%20width%3D%225%22%20height%3D%222%22/%3E%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2224%22%20height%3D%224%22/%3E%3Crect%20x%3D%221%22%20y%3D%228%22%20width%3D%2228%22%20height%3D%223%22/%3E%3C/svg%3E") 70% 236px/90px no-repeat,
+ linear-gradient(#6fbfff 0 470px,#8fd0ff 470px 1100px,#b5e2ff 1100px) no-repeat}
+a{color:var(--ink);text-decoration-color:rgba(27,21,48,.35)}a:hover{text-decoration-color:var(--ink)}
+header{background:#6a57c9;border-bottom:4px solid #1b1530;backdrop-filter:none;-webkit-backdrop-filter:none}
+.brand{font:13px var(--px);color:#fff;gap:12px;letter-spacing:.02em}.brand i{width:26px;height:26px;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Crect%20x%3D%222%22%20y%3D%220%22%20width%3D%2212%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%221%22%20y%3D%221%22%20width%3D%2214%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%220%22%20y%3D%222%22%20width%3D%2210%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%2214%22%20y%3D%222%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%220%22%20y%3D%223%22%20width%3D%2210%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%2214%22%20y%3D%223%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%220%22%20y%3D%224%22%20width%3D%2210%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%2214%22%20y%3D%224%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%220%22%20y%3D%225%22%20width%3D%2210%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%2214%22%20y%3D%225%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%220%22%20y%3D%226%22%20width%3D%2216%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%220%22%20y%3D%227%22%20width%3D%226%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%229%22%20y%3D%227%22%20width%3D%227%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%220%22%20y%3D%228%22%20width%3D%226%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%229%22%20y%3D%228%22%20width%3D%227%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%220%22%20y%3D%229%22%20width%3D%226%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%227%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%220%22%20y%3D%2210%22%20width%3D%2216%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%220%22%20y%3D%2211%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%225%22%20y%3D%2211%22%20width%3D%2211%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%220%22%20y%3D%2212%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%225%22%20y%3D%2212%22%20width%3D%2211%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%220%22%20y%3D%2213%22%20width%3D%2216%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%220%22%20y%3D%2214%22%20width%3D%2215%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%220%22%20y%3D%2215%22%20width%3D%2214%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3C/svg%3E") center/contain no-repeat}
+.top nav a{color:#e9e3ff;font-family:var(--pxs);font-weight:600}.top nav a:hover{color:#fff}.top nav a.on{color:#ffcf3a}
+.lang{border:3px solid #1b1530;background:#fff;font-family:var(--pxl)}.lang button{color:#1b1530}.lang button.on{background:#ffcf3a;color:#1b1530}
+h1{font:400 33px/1.45 var(--px);letter-spacing:0;color:#fff;text-shadow:4px 4px 0 #1b1530;max-width:1000px}
+h1 .cur{width:.5em;height:.12em;vertical-align:0;background:#ffcf3a}
+.sub{color:var(--ink);font-family:var(--sans);font-weight:500}.by{color:#2d2550}.by a{color:var(--ink)}
+h2,.vhead h3{font-family:var(--px);font-weight:400;letter-spacing:0;line-height:1.5}h2{font-size:14px}.card.key h2{font-size:15px}.vhead h3{font-size:17px}
+.card,.card.key,.card.key2{background:var(--card);border:4px solid #1b1530;box-shadow:8px 8px 0 #1b1530;backdrop-filter:none;-webkit-backdrop-filter:none;color:var(--ink)}
+.card.key .meta,.card.key .note,.card.key .tile .d,.card.key .tile .k,.card.key .toggle,.card.key .ai,.card.key .rr span,.card.key .lgd,.card.key2 .note,.card.key2 .cmp td.usual,.card.key2 th{color:var(--mute)}
+.tile,.rr,.q,.verdict,.bench,.card.key .tile,.card.key .rr,.card.key .verdict{background:#fff;border:3px solid #1b1530}
+button.tile:hover,button.rr:hover,.card.key .tile:hover{background:#f3eeff;transform:translate(-2px,-2px);box-shadow:2px 2px 0 #1b1530}
+.verdict span,.card.key .verdict span{color:var(--vio)}
+.tile .k{font:12px var(--pxl);letter-spacing:.02em}.tile .v{font:18px/44px var(--px);letter-spacing:0}.tile .v.txt{font:600 17px/1.25 var(--pxs)}
+.health b,.cmp td.num{font-family:var(--px);font-size:17px;letter-spacing:0;line-height:1.6}
+.fk{background:#fff;border:3px solid #1b1530}.fk b{font-family:var(--px);font-size:16px;letter-spacing:0;line-height:1.6}.fk span{color:var(--mute)}
+.fk.ok{background:#e4f8ec;border-color:#1b1530}.fk.watch{background:#fff1d6;border-color:#1b1530}.fk.flag{background:#ffe1e1;border-color:#1b1530}
+.btn{background:#ffcf3a;color:#1b1530;border:3px solid #1b1530;box-shadow:4px 4px 0 #1b1530;font-family:var(--pxs);font-weight:700}
+.btn:hover{background:#ffe07a}.btn:active{transform:translate(4px,4px);box-shadow:none}
+.ghost,.chip,.more,.card.key .ghost{background:#fff;border:3px solid #1b1530;color:var(--ink);font-family:var(--pxs);font-weight:600}
+.ghost:hover,.chip:hover,.more:hover{background:#f3eeff}.chip.on{background:#6a57c9;border-color:#1b1530;color:#fff}
+.tabs{background:#efe6d2;border:3px solid #1b1530}.tabs button{color:var(--mute);font-family:var(--pxs);font-weight:600}.tabs button:hover{color:var(--ink)}.tabs button.on{background:#6a57c9;color:#fff}
+input[type=text],input[type=password],select{background:#fff;border:3px solid #1b1530;color:var(--ink)}
+input[type=text]::placeholder,input[type=password]::placeholder{color:#8a83a0}
+input[type=text]:focus,input[type=password]:focus{outline:3px solid #ffcf3a;border-color:#1b1530}
+th{color:var(--mute);font-family:var(--pxl);font-weight:400;letter-spacing:.02em;border-bottom:3px solid #1b1530}th:hover{color:var(--ink)}
+td{border-bottom:2px solid #ece3cf}tbody tr:hover{background:#faf5ff}tbody tr.on{background:#efe9ff;box-shadow:inset 4px 0 0 var(--vio)}
+.bscroll{border:3px solid #1b1530}.bscroll th{background:#fffaf0}
+.badge,.lt,.tag,.bz{font-family:var(--pxl);font-weight:400;letter-spacing:.03em}
+.badge{background:#efe6d2;color:var(--ink)}.badge.warn{background:#ffd9d9;color:#a12424}
+.tag{background:#efe6d2;color:#4a4360}.tag.want{background:#d3f5df;color:#11703d}.tag.hesitant{background:#ffe9c2;color:#8a5200}.tag.critical{background:#ffd9d9;color:#a12424}
+.lt{background:#efe6d2;color:#4a4360}.lt.ok{background:#d3f5df;color:#11703d}.lt.watch{background:#ffe9c2;color:#8a5200}.lt.flag{background:#ffd9d9;color:#a12424}
+.bz{background:#efe6d2;color:var(--ink)}.bz.ref{background:#e6dfff;color:#4b3a9e}.bz.off{background:#d3f5df;color:#11703d}
+.st.done,.st.have{color:#11703d}.st.error{color:#a12424}.st.running{color:#8a5200}
+.ai b{background:#6a57c9;color:#fff;font-family:var(--pxl);font-weight:400}
+.notice{background:#fff1d6;border:3px solid #1b1530;color:#6b4100}
+.prog{height:10px;background:#efe6d2;border:2px solid #1b1530}.prog i{background:#6a57c9}
+.stack{height:18px;gap:3px}.bar i{height:10px;background:#1b1530}.lg:hover,.bar:hover{background:#f3eeff}
+.lv,.fd,.dot,.lt::before,.fk>i,.rr .lv{border-radius:0!important}
+mark{background:#ffe27a}
+.cm p.zh,.q p.zh{color:#4a4360;border-left:3px solid #1b1530}
+.mx .z{background:#f6f0e2;color:#a9a2b8}.mx button:hover{outline:3px solid #1b1530}
+.fit .ql{fill:#5c5474;font-family:var(--sans)}
+.fit text,.chart text{font-family:var(--sans)}
+.method{color:#2d2550}.method h3{color:var(--ink)}
+.road,.imp,.mgo,.fit{border-top-color:#e3d8c0}
+.cm p,.q p,.verdict,.meta,.note,.method,.tile .d,.lg,.bar,input,td,.rr span,.imp span,.lgd2>span:not(.lt),.mgo>span,.lead,.fk span,.msg,.ai,.toggle{font-family:var(--sans)}
+footer{color:var(--ink);border-top:0;font-family:var(--mono)}footer a{color:var(--ink)}
+html[lang="zh-CN"] h1{font-family:var(--sans);font-weight:800;letter-spacing:.02em}
+html[lang="zh-CN"] h2,html[lang="zh-CN"] .vhead h3,html[lang="zh-CN"] .fk b{font-family:var(--sans);font-weight:800}
+html[lang="zh-CN"] h2{font-size:18px}html[lang="zh-CN"] .fk b{font-size:20px}
+@media(max-width:720px){
+ h1{font-size:19px;line-height:1.7;text-shadow:3px 3px 0 #1b1530}html[lang="zh-CN"] h1{font-size:28px;line-height:1.3}
+ h2{font-size:12px}.vhead h3{font-size:14px}.tile .v{font-size:15px}.fk b{font-size:13px}
+ .brand{font-size:11px}.brand i{width:22px;height:22px}
+ .card,.card.key,.card.key2{box-shadow:5px 5px 0 #1b1530;padding:18px}
+ body{background-position:left bottom,96% 74px,-400px -400px,0 0;background-size:32px,90px,70px,auto}
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pixelify+Sans:wght@400..700&family=Silkscreen&display=swap" rel="stylesheet">
+</head>
+<body>
+<header><div class="wrap top">
+  <div class="brand"><i></i>Hype HUD</div>
+  <nav>
+    <a href="#compare" data-i="navCompare"></a><a href="#fake" data-i="navFake"></a><a href="#detail" data-tab="overview" data-i="tOverview"></a><a href="#detail" data-tab="audience" data-i="tAudience"></a><a href="#detail" data-tab="creator" data-i="tCreator"></a><a href="#detail" data-tab="comments" data-i="tComments"></a><a href="#method" data-i="navMethod"></a>
+    <div class="lang"><button data-lang="en">EN</button><button data-lang="zh">中文</button></div>
+  </nav>
+</div></header>
+<main><div class="wrap">
+  <h1><span data-i="h1"></span><span class="cur"></span></h1>
+  <p class="sub" data-i="sub"></p>
+  <p class="by"><span data-i="by"></span> Yuhan Liu · <a href="mailto:iamyuhanliu@gmail.com">iamyuhanliu@gmail.com</a></p>
+  <div id="notice"></div>
+  <div class="card key2">
+    <div class="row">
+      <input type="text" id="url" autocomplete="off">
+      <button class="btn" id="go" data-i="analyse"></button>
+    </div>
+    <div class="row" id="pwrow" hidden style="margin-top:10px"><input type="password" id="pw" autocomplete="off"><button class="ghost" id="pwok" data-i="pwSave"></button></div>
+    <div class="chips" id="samples"></div>
+    <div class="msg" id="msg"></div>
+    <div class="quota" id="quota"></div>
+    <div class="imp"><button class="ghost" id="imp" data-i="impBtn"></button><span data-i="impHint"></span><input type="file" id="file" accept=".xlsx,.xls,.csv,.tsv,.txt" hidden></div>
+  </div>
+  <div id="batch"></div>
+  <div id="channel"></div>
+  <div class="card" id="compare">
+    <div class="hrow"><h2 data-i="compareTitle"></h2><button class="ghost" id="csv1" data-i="exportTable"></button></div>
+    <div class="scroll"><table><thead><tr id="heads"></tr></thead><tbody id="rows"></tbody></table></div>
+  </div>
+  <div id="detail"></div>
+  <div class="card method" id="method"><h2 data-i="methodTitle"></h2><ul id="methodList"></ul><div class="mgo" id="methodGo"></div></div>
+  <footer><span><span data-i="by"></span> Yuhan Liu · <a href="mailto:iamyuhanliu@gmail.com">iamyuhanliu@gmail.com</a></span><span id="foot"></span></footer>
+</div></main>
+
+<script src="data.js"></script>
+<script src="config.js"></script>
+<script>
+const D = window.DATA || {videos:[]};
+const API = (window.CS_API || '').replace(/\/+$/, '');
+let PW = ''; try { PW = sessionStorage.getItem('cs-pw') || ''; } catch (e) {}
+try { JSON.parse(localStorage.getItem('cs-added') || '[]').forEach(v => { if (v && v.id && Array.isArray(v.comments) && !D.videos.some(x => x.id === v.id)) D.videos.push(v); }); } catch (e) {}
+function saveAdded() { try { localStorage.setItem('cs-added', JSON.stringify(D.videos.filter(v => v.live).slice(-40))); } catch (e) {} }
+const I = {
+en:{
+  navCompare:'Compare', navDetail:'Video detail', navMethod:'Method',
+  h1:'See how a sponsored video landed',
+  sub:'Paste a YouTube video to read its comments and see how many viewers talk about the game and want to play it. Paste a channel link to check the channel\'s numbers.',
+  by:'Built by', analyse:'Analyse', ph:'Paste a YouTube video link, or a channel link to check the channel', compareTitle:'Compare sponsored videos', methodTitle:'Method and limits',
+  heads:['Creator','Views','vs channel','Like rate','About the game','Want to play','Hesitant','Top barrier','Competitor players','Ad pushback','Fee (USD)','CPM'],
+  headTips:['','Total views of the video','Views of this video divided by the median views of the creator\'s other long videos from the same period (or the most recent ones for a new video). Below 1x means it did worse than the creator\'s usual video.','Likes divided by views','Share of analysed comments that talk about the game','Share of game comments that want to play or praise the game','Share of game comments that are interested but name a condition or worry','The reason for not playing that comes up most often','Share of commenters who reveal they play a competing game','Share of comments that dislike the sponsorship','Type what you paid or were quoted. Stays in this browser only.','Fee divided by views, times 1,000'],
+  pwPh:'Access password', pwSave:'Continue', mPw:'Enter the access password to analyse a new video.',
+  pFetch:'Fetching the video and its comments…', pRead:(d,t)=>`Reading comments: ${d} of ${t} batches done. This takes about 20 seconds.`,
+  pPartial:n=>`Done, but ${n} comments could not be read and are left out.`,
+  e_bad_password:'Wrong password. Try again.', e_need_password:'Enter the access password to analyse a new video.', e_daily_limit:'This site has used up its budget for today. Videos already analysed are still available. Try again tomorrow.',
+  e_user_limit:'Your free credit is used up. Videos already analysed are still available.', quota:(left,lim)=>`Free credit: $${left} left of $${lim}.`, e_video_not_found:'That video does not exist or is not public.',
+  e_no_comments:'Comments are turned off or empty on that video, so there is nothing to analyse.', e_bad_link:'That is not a supported video link.', e_not_supported:'That platform is not supported yet.',
+  e_youtube_error:'YouTube did not return the data. Try again in a moment.', e_model_failed:'The model could not read the comments. Try again in a moment.',
+  e_network:'Could not reach the analysis server. Check your connection and try again.', e_server_error:'Something went wrong on the server. Try again in a moment.',
+  impBtn:'Import a sheet', impHint:'Drop an .xlsx or .csv with many creator links here, or paste several links into the box above.',
+  bTitle:n=>`Batch import: ${n}`, bNone:'No video links were found in that file.', bReading:'Reading the file…', bBad:'That file could not be read. Use .xlsx, .xls or .csv.',
+  bReady:'ready to analyse', bHave:'already analysed', bSkip:'cannot be analysed', bIgn:'other links ignored', bDone:'done', bFail:'failed',
+  bCost:(n,left)=>`${n} new videos to analyse${left == null ? '' : ` (you have $${left} of free credit left)`}.`,
+  bName:'Creator name column', bFee:'Fee column', bNoCol:'none', bCol:c=>`Column ${c}`,
+  bStart:n=>`Analyse ${n} videos`, bRetry:n=>`Retry ${n} failed`, bStop:'Stop', bStopping:'Stopping after the current videos…', bExport:'Export sheet with results', bClose:'Close',
+  bHeads:['Row','Creator','Link','Status','Want to play'],
+  bs:{ready:'Ready', have:'Already analysed', dup:'Duplicate of a link above', channel:'Channel link. A video link is needed', ytother:'Not a video link', platform:'Platform not supported yet', running:'Analysing…', done:'Done'},
+  xHeads:['Video title','Channel','Views','Views / subs','Like rate','About the game','Want to play','Hesitant','Top barrier','Competitor players','Ad pushback','CPM (USD)','In one line','Status'],
+  chBtn:'Check this channel', chBusy:'Checking the channel…', chTitle:'Channel check', chClose:'Close',
+  e_channel_link:'That channel link is not supported. Use a link with @handle or /channel/, or paste any video from the channel.', e_channel_not_found:'That channel could not be found.',
+  chMeta:(c)=>`${c.handle ? c.handle + ' · ' : ''}${c.country ? c.country + ' · ' : ''}on YouTube since ${c.created.slice(0, 4)} · ${big(c.videoCount)} videos · checked ${c.checked}`,
+  chNoAi:'Computed from public YouTube data. No AI is used in this check.',
+  chK:['Subscribers','Median views','Views per subscriber','Median like rate','Median comment rate','Declared sponsored'],
+  chD:{base:n=>`last ${n} long videos`, sp:(a,n)=>`${a} of the last ${n}`, hidden:'hidden by the channel'},
+  chSig:'Signals', chNote:'A mismatch here is a reason to ask the creator about it. It can have ordinary causes, such as an old channel, a change of format or a single viral hit. Public data cannot show who the subscribers are.',
+  cs:{reach:'Do subscribers actually watch?', reachV:(p,n)=>`A typical video is watched by ${p} of the subscriber count (median of ${n} videos).`, reachH:'The subscriber count is hidden, so this cannot be checked.', reachT:()=>'Compared with channels of a similar size.',
+    steady:'Are views steady?', steadyV:(p,k)=>`${p} of videos land in this channel\'s normal range. The biggest is ${k} times the median.`,
+    spike:'Views that outrun the likes', spikeV:n=>n ? `${n} video${n === 1 ? ' has' : 's have'} unusually high views with an unusually low like rate.` : 'No video combines unusually high views with an unusually low like rate.',
+    likeT:()=>'Compared with videos of a similar scale.', comT:()=>'Compared with videos of a similar scale.',
+    like:'Like rate', likeV:p=>`The median video gets ${p} likes per view.`, com:'Comment rate', comV:p=>`The median video gets ${p} comments per view.`,
+    spo:'Sponsored videos against the rest', spoV:(v,l)=>`Sponsored videos get ${v} of the usual views and ${l} of the usual like rate.`, spoN:n=>`Only ${n} declared sponsored video${n === 1 ? '' : 's'} in this sample, too few to compare.`,
+    act:'Recent activity', actV:(d,n)=>`Last upload ${d} days ago, ${n} uploads in the past 90 days.`},
+  chChart:'Views on recent long videos', chChartNote:'Oldest on the left. Bar height uses a square root scale so that one hit does not flatten the rest. The dashed line is the median.',
+  chLg:['Regular video','Declared sponsored','High views, low like rate'],
+  chSp:'Declared sponsored videos', chOut:'Videos worth a closer look', chH:['Video','Date','Views','vs median','Like rate',''], chAn:'Analyse comments',
+  chAsk:'What to ask the creator for before signing', chAskL:['Audience geography for the last 90 days. Bought traffic usually comes from places the creator does not speak to.','Traffic sources for recent videos. A large share from external or direct sources on a video with weak engagement needs an explanation.','Audience retention on two recent videos. Purchased views tend to leave within seconds.','Unique viewers and returning viewers, which are more telling than the public subscriber count.'],
+  vch:'of the channel\'s usual views', vchOld:d=>`Keep in mind: this video came out on ${d}, before all of those. So it is being compared with how the channel performs today. If the channel has grown or shrunk since then, the comparison is less exact.`, v7:x=>`It reached ${x} times the channel\'s usual views.`,
+  navFake:'Fake check', tOverview:'Overview', tAudience:'Audience', tCreator:'Channel and risks', tComments:'Comments',
+  lvN:{ok:'Normal', watch:'Check', flag:'Abnormal', info:'For reference', load:'Loading'}, lvLg:'What the labels mean:', lvLgT:{ok:'nothing unusual', watch:'worth a second look', flag:'outside the normal range', info:'context only, not scored'},
+  dotLg:'The dot before each name is the fake check result: green means no sign of bought subscribers or views, amber means some numbers need an explanation, red means several signs.',
+  cmpH:['', 'This video', 'Channel usually', 'How it compares'], cmpViews:'Views', cmpLike:'Likes per view', cmpCom:'Comments per view',
+  cmpLow:(p,w)=>`${p} of ${w}`, cmpSame:(p,w)=>`${p} of ${w}, about the same`, cmpHigh:(x,w,p)=>x >= 2 ? `${x.toFixed(1)} times ${w}` : `${p} of ${w}`,
+  cmpLead:(k,p,w)=>k === 'low' ? `This video was watched only ${p} as much as the creator's ${w} videos.` : k === 'high' ? `This video was watched ${p} times as much as the creator's ${w} videos.` : `This video was watched about as much as the creator's ${w} videos (${p}).`,
+  cmpBase:n=>`"Usually" is the typical views of the channel\'s recent long videos (${n} videos, no Shorts or live streams).`, cmpTag:{low:w=>`Below ${w}`, same:()=>'In line', high:w=>`Above ${w}`},
+  cmpHP:['', 'This video', 'Same period', 'Channel today', 'Against the same period'],
+  cmpLeadP:'same-period', cmpOut:'That makes it a one-off hit. When pricing this creator, go by their usual level.', wUsual:['usual', 'the usual level', 'usual'], wPeriod:['same-period', 'the same-period level', 'same period'],
+  cmpBaseP:(n,a,b)=>`"Same period" is the typical views of ${n} long videos the channel published around this one (${a} to ${b}).`,
+  cmpNow:n=>`"Channel today" is worked out the same way from the ${n} most recent long videos.`, cmpRule:'Clearly under the usual level is labelled below, clearly over it is above, and close to it is level. I set these lines myself. There is no industry standard.',
+  fkTitle:'Bought subscribers or views?', fk:{ok:'No sign of bought subscribers or views', watch:'Some numbers need an explanation', flag:'Several signs of bought subscribers or views', load:'Checking the channel…', info:'Channel data is not available'},
+  fkSub:(n,f,w)=>`${n} checks on public data: ${f} failed, ${w} need a closer look. The creator's own analytics settle it.`, chMore:'Channel details', crTitle:'This video against the creator\'s other videos', crLoading:'Loading the creator\'s channel…', crNone:'Channel data is not available for this video.',
+  qTitle:'Quotes worth using', qNote:'The most liked comment of each kind.',
+  port:(n,views,med,cpm)=>`<span><b>${n}</b> videos</span><span><b>${views}</b> total views</span><span>median want to play <b>${med}</b></span>` + (cpm ? `<span>blended CPM <b>$${cpm}</b></span>` : ''),
+  roadTitle:'On the roadmap', road:['TikTok, Twitch and Instagram through the reserved platform adapter, once the data source has had a legal review.','Creator vetting from the open web: recent news and forum threads about a creator, listed with their sources and no verdict.','One-click translation of comments.','A one page PDF report per creator.'],
+  nextTitle:'Suggested next brief', nextNote:'Generated from the numbers above by fixed rules, as a starting point for discussion.',
+  nb:{low:p=>`${p} of comments are about the game. If the goal was awareness, that can be fine. If it was conversion, ask for the game to drive the premise of the next video.`,
+    fit:'Viewers talk about the game and many say they want it. On this evidence the creator is worth considering for a repeat, and the strongest comments can serve as social proof.',
+    comp:(p,c)=>`${p} of commenters reveal they play ${c}. Brief a direct comparison: what this game does that ${c} does not.`,
+    hes:p=>`${p} of interested viewers are waiting on something. A follow-up video after the next update or price change could convert them.`,
+    ad:n=>`${n} comments push back on the sponsorship. Let the creator keep their usual format and state the sponsorship early and plainly.`,
+    small:'There are too few comments about the game to act on these with confidence.',
+    b:{product:'Viewers question features or quality. Give the creator the roadmap or the fix so the next video can show it.',price:'Price is the sticking point. Time the next video with a discount or bundle and give the creator a tracked link.',device:'Viewers doubt it will run on their hardware. Ask the creator to show performance on a mid-range setup.',theme:'The theme or genre puts some viewers off. Lead with the hook that travels across genres, or test a creator from a neighbouring genre.',skill:'It looks hard to some viewers. Brief a beginner friendly first hour.',time:'Viewers say they lack time. Brief a short-session angle: what you can do in 20 minutes.',awareness:'Viewers are unsure what the game is. Ask for a plain one-line explanation in the first 30 seconds.',prior:'Viewers think they need the earlier games. Have the creator say clearly that they do not.',emotion:'Some find it too intense. Show the calmer side or the difficulty options.',social:'Viewers have no one to play with. Show solo play or matchmaking.',loyal:'Viewers are committed to another game. Position this one as a second game, not a replacement.'}},
+  mxTitle:'Who is blocked by what', mxNote:'Rows are who the commenter is, columns are the barrier they name. Click a cell to read those comments.',
+  rTitle:'Creator risk signals', rNote:'Treat each signal as a prompt to check. Read the comments and the source before acting on it.',
+  rCv:'Controversy about the creator', rAd:'Sponsorship pushback', rAdV:(d,n)=>`${d} dislike it, ${n} mention it`, rDis:'Disclosure', rDisOk:'Paid promotion is declared to YouTube', rDisBad:'Viewers mention a sponsorship, but no paid promotion is declared', rDisNone:'No sponsorship detected',
+  rDup:'Repeated comments', rLow:'Very short comments', rShare:(n,p)=>`${n} comments, ${p}`, rNews:c=>`Search recent news about ${c}`, rBadge:n=>`${n} risk signal${n === 1 ? '' : 's'} flagged`,
+  fDup:'Repeated comments', fLow:'Very short comments', fLb:(l,b)=>`${l} · ${b}`,
+  fitTitle:'Fit map', fitX:'Share of comments about the game', fitY:'Want to play', fitNote:'Each bubble is one video and its size is views. The dashed lines are the medians of the videos shown, so a position only means something within this set. Click a bubble to open that video.',
+  fitQ:['Less game talk, keener','More game talk, keener','Less game talk, less keen','More game talk, less keen'], fitMed:'median',
+  ai:m=>`Analysed by an AI model (${m}). Individual labels can be wrong, so open the comments behind a number before you rely on it.`,
+  trBtn:'Translate these comments', trBusy:'Translating…', trFail:'Translation failed. Try again in a moment.',
+  vsMed:d=>`${d >= 0 ? '+' : ''}${d} pts vs median`, copyLink:'Copy link', copied:'Copied', copyQuote:'Copy quote', remove:'Remove from this list',
+  exportTable:'Export table', exportComments:'Export these comments', feePh:'add',
+  vLabel:'In one line',
+  v1:p=>`Most comments are about the creator or the video itself; ${p} are about the game. That is common on entertainment-led channels.`,
+  v2:(r,i,h)=>`${r} of comments are about the game. Of those, ${i} want to play and ${h} are interested but hesitant.`,
+  v3:(p,c)=>`${p} of commenters reveal they play a competing game, most often ${c}.`,
+  v4:(b,n)=>`The most common barrier is "${b}" (${n} comments).`,
+  v5:n=>`${n} comments push back on the sponsorship.`,
+  v6:n=>`Only ${n} comments are about the game, so the percentages are rough.`,
+  tip:{rel:'Share of analysed comments that talk about the game, rather than the creator or a joke. Click to see them.',want:'Of the comments about the game, the share that want to play, already play happily, or clearly praise the game.',hes:'Of the comments about the game, the share that are interested but state a condition, wish or worry.',bar:'The reason for not playing that is named most often.',comp:'Share of all analysed comments whose author reveals they play a competing game.',ad:'Share of all analysed comments that dislike the sponsorship.'},
+  cHeads:['Comment','Likes','Stance','Barrier 1','Barrier 2','Commenter','Competitor','Sponsorship','Controversy','Confidence','Evidence'],
+  mEmpty:'Paste a YouTube video link first.', mBad:'That does not look like a YouTube video link. Channel links and other platforms are not supported yet.',
+  mLive:'Live analysis is not connected in this preview. The videos below have already been analysed.',
+  partial:'Preview data: only a 100 comment test sample is loaded, so the numbers below are not final.', nodata:'No data loaded. Run analyze.py first.',
+  paid:'Paid promotion declared', small:'small sample', weight:'Weight comments by likes',
+  meta:(v,m)=>`Published ${v.published} · ${big(v.views)} views · ${big(v.subs)} subscribers · ${m.n} comments analysed of ${big(v.commentCount)}`,
+  kRel:'About the game', kWant:'Want to play', kHes:'Hesitant', kBar:'Top barrier', kComp:'Competitor players', kAd:'Ad pushback',
+  ofAll:(a,b)=>`${a} of ${b} comments`, ofRel:(a,b)=>`${a} of ${b} game comments`, nComments:n=>n+(n===1?' comment':' comments'),
+  noBar:'None found', noBarD:'no barrier stated', adD:(d,n)=>`${d} dislike, ${n} mention the sponsorship`, none:'none',
+  stance:'Stance toward the game', holding:'What is holding people back', noReason:'No comment states a reason for not playing.',
+  who:'Who is commenting', noClue:(a,b)=>`${a} of ${b} comments give no clue about the commenter.`,
+  health:'Channel health on this video', vps:'views per subscriber', lpv:'likes per view', cpv:'comments per view',
+  cv:'Controversy signals', low:'Low confidence labels', behind:'Comments behind the numbers', search:'Search within comments',
+  all:'All', noMatch:'No comments match.', more:n=>`Show more (${n} left)`, likes:'likes', lowTag:'low confidence', cvTag:'Controversy signal',
+  fRel:'About the game', fBar:'Barrier: ', fMention:'Mentions ', fAd:'Mentions the sponsorship',
+  foot:(a,b,g)=>`${a} videos · ${b} comments analysed · data generated ${g}`,
+  a:{want:'Want to play',hesitant:'Interested but hesitant',critical:'Critical of the game',unclear:'About the game, no stance',offtopic:'Not about the game'},
+  b:{awareness:'Did not know the game',theme:'Theme or genre',skill:'Looks too hard',device:'Platform or hardware',price:'Price',time:'Time',prior:'Has not played earlier games',emotion:'Too scary or stressful',social:'No one to play with',product:'Features or quality',loyal:'Committed to a competitor'},
+  l:{fan:'Existing fans',competitor:'Competitor players',newcomer:'Newcomers',unknown:'Not identifiable'},
+  ad:{accept:'Accepts the sponsorship',neutral:'Mentions the sponsorship',dislike:'Dislikes the sponsorship'},
+  method:m=>['Everything comes from the official YouTube Data API and uses public data only. Commenter names are not stored.',
+    `Each comment is read and labelled by a language model (${m}). There is no keyword list, and a single label can be wrong.`,
+    'Commenters are a small and unusual part of the audience. These numbers suit comparing videos and finding reasons. They cannot forecast sales.',
+    'The lines behind each label draw on published industry figures and platform rules. The rest are starting points I set by judgement, and none of them is calibrated on a large sample.',
+    'Label accuracy: on a test set of 100 comments, the stance label matched the reference answer for 92.']
+},
+zh:{
+  navCompare:'对比', navDetail:'视频详情', navMethod:'方法',
+  h1:'看一条赞助视频的真实反响',
+  sub:'粘贴一条 YouTube 赞助视频，看评论里有多少人在聊游戏、多少人想玩。粘贴频道链接，可以检查这个频道的数据。',
+  by:'作者', analyse:'分析', ph:'粘贴 YouTube 视频链接分析评论，或粘贴频道链接做频道体检', compareTitle:'赞助视频对比', methodTitle:'方法与局限',
+  heads:['创作者','播放','相对频道','点赞率','游戏相关度','想玩','犹豫','首要门槛','竞品玩家','广告反感','报价 (USD)','CPM'],
+  headTips:['','视频总播放量','这条视频的播放量除以这位创作者同期其他长视频的播放中位数（新视频则和最近的视频比）。小于 1x 说明它不如这位创作者平时的视频。','点赞数除以播放量','已分析评论里聊到游戏的占比','游戏相关评论里，想玩或明确夸游戏的占比','游戏相关评论里，感兴趣但提出条件或顾虑的占比','被提到最多的不玩原因','透露自己在玩竞品的评论者占比','反感赞助的评论占比','填入你支付或收到的报价，只保存在这个浏览器里。','报价除以播放量，再乘以 1000'],
+  pwPh:'访问密码', pwSave:'继续', mPw:'分析新视频需要先输入访问密码。',
+  pFetch:'正在获取视频和评论…', pRead:(d,t)=>`正在阅读评论：已完成 ${d}/${t} 批，整个过程大约 20 秒。`,
+  pPartial:n=>`已完成，但有 ${n} 条评论没读出来，未计入结果。`,
+  e_bad_password:'密码不对，请重试。', e_need_password:'分析新视频需要先输入访问密码。', e_daily_limit:'网站今天的总预算已用完，已分析过的视频仍可查看，请明天再试。',
+  e_user_limit:'你的免费额度已用完，已分析过的视频仍可查看。', quota:(left,lim)=>`免费额度：还剩 $${left}，共 $${lim}。`, e_video_not_found:'这条视频不存在或不是公开视频。',
+  e_no_comments:'这条视频关闭了评论或没有评论，无法分析。', e_bad_link:'这不是支持的视频链接。', e_not_supported:'暂不支持这个平台。',
+  e_youtube_error:'YouTube 没有返回数据，请稍后再试。', e_model_failed:'模型没能读出评论，请稍后再试。',
+  e_network:'连不上分析服务器，请检查网络后重试。', e_server_error:'服务器出了点问题，请稍后再试。',
+  impBtn:'导入表格', impHint:'把含有很多创作者链接的 .xlsx 或 .csv 拖到这里，或者把多条链接一起粘贴到上面的输入框。',
+  bTitle:n=>`批量导入：${n}`, bNone:'这个文件里没有找到视频链接。', bReading:'正在读取文件…', bBad:'读不了这个文件，请使用 .xlsx、.xls 或 .csv。',
+  bReady:'条待分析', bHave:'条已分析过', bSkip:'条无法分析', bIgn:'条其他链接已忽略', bDone:'条完成', bFail:'条失败',
+  bCost:(n,left)=>`待分析 ${n} 条新视频${left == null ? '' : `（你还剩 $${left} 免费额度）`}。`,
+  bName:'创作者名字所在列', bFee:'报价所在列', bNoCol:'无', bCol:c=>`${c} 列`,
+  bStart:n=>`分析 ${n} 条视频`, bRetry:n=>`重试 ${n} 条失败的`, bStop:'停止', bStopping:'当前几条跑完后停止…', bExport:'导出带结果的表格', bClose:'关闭',
+  bHeads:['行','创作者','链接','状态','想玩'],
+  bs:{ready:'待分析', have:'已分析过', dup:'和上面的链接重复', channel:'这是频道链接，需要具体的视频链接', ytother:'不是视频链接', platform:'暂不支持这个平台', running:'分析中…', done:'完成'},
+  xHeads:['视频标题','频道','播放','播放/粉丝','点赞率','游戏相关度','想玩','犹豫','首要门槛','竞品玩家','广告反感','CPM (USD)','一句话结论','状态'],
+  chBtn:'体检这个频道', chBusy:'正在体检频道…', chTitle:'频道体检', chClose:'关闭',
+  e_channel_link:'不支持这种频道链接。请用带 @名字 或 /channel/ 的链接，或者直接粘贴这个频道的任意一条视频。', e_channel_not_found:'找不到这个频道。',
+  chMeta:(c)=>`${c.handle ? c.handle + ' · ' : ''}${c.country ? c.country + ' · ' : ''}${c.created.slice(0, 4)} 年开通 · ${big(c.videoCount)} 条视频 · 体检于 ${c.checked}`,
+  chNoAi:'根据 YouTube 公开数据计算，这项检查没有使用 AI。',
+  chK:['粉丝数','播放中位数','播放/粉丝','点赞率中位数','评论率中位数','已声明赞助'],
+  chD:{base:n=>`最近 ${n} 条长视频`, sp:(a,n)=>`最近 ${n} 条中有 ${a} 条`, hidden:'频道隐藏了粉丝数'},
+  chSig:'信号', chNote:'这里的不匹配只说明值得向创作者问清楚。它也可能有正常原因，比如老频道、内容转型、偶然爆了一条。公开数据看不到粉丝是谁。',
+  cs:{reach:'粉丝真的在看吗', reachV:(p,n)=>`一条普通视频的播放量相当于粉丝数的 ${p}（${n} 条视频的中位数）。`, reachH:'频道隐藏了粉丝数，这一项无法检查。', reachT:()=>'这是和同规模频道比的结果。',
+    steady:'播放量稳定吗', steadyV:(p,k)=>`${p} 的视频播放量在这个频道的正常范围里。最高的一条是中位数的 ${k} 倍。`,
+    spike:'播放高但点赞跟不上', spikeV:n=>n ? `有 ${n} 条视频播放明显偏高，点赞率却明显偏低。` : '没有哪条视频同时出现播放异常高、点赞率异常低。',
+    likeT:()=>'这是和同量级视频比的结果。', comT:()=>'这是和同量级视频比的结果。',
+    like:'点赞率', likeV:p=>`中位数视频每次播放带来 ${p} 的点赞。`, com:'评论率', comV:p=>`中位数视频每次播放带来 ${p} 的评论。`,
+    spo:'赞助视频和平时比', spoV:(v,l)=>`赞助视频的播放量是平时的 ${v}，点赞率是平时的 ${l}。`, spoN:n=>`这批视频里只有 ${n} 条声明了赞助，太少，无法比较。`,
+    act:'近期活跃度', actV:(d,n)=>`最近一次上传在 ${d} 天前，过去 90 天上传了 ${n} 条。`},
+  chChart:'近期长视频的播放量', chChartNote:'最早的在左边。柱高用平方根刻度，避免一条爆款把其他视频压扁。虚线是中位数。',
+  chLg:['普通视频','已声明赞助','播放高、点赞率低'],
+  chSp:'已声明赞助的视频', chOut:'值得细看的视频', chH:['视频','日期','播放','相对中位数','点赞率',''], chAn:'分析评论',
+  chAsk:'签约前建议向创作者要的数据', chAskL:['近 90 天的观众地区分布。买来的流量通常来自创作者并不面向的地区。','近期视频的流量来源。互动很弱的视频如果外部或直接来源占比很高，需要对方解释。','两条近期视频的观众留存曲线。买来的播放往往几秒内就离开。','独立观众数和回访观众数，它们比公开的粉丝数更说明问题。'],
+  vch:'相当于频道平时播放量的倍数', vchOld:d=>`需要留意：这条视频发布于 ${d}，比上面这些视频都早。所以这里是拿它和频道现在的水平比。如果频道在这之后涨了或跌了，对比会有偏差。`, v7:x=>`播放量是该频道平时水平的 ${x} 倍。`,
+  navFake:'买粉检测', tOverview:'概览', tAudience:'观众', tCreator:'频道与风险', tComments:'评论',
+  lvN:{ok:'正常', watch:'留意', flag:'异常', info:'仅供参考', load:'加载中'}, lvLg:'标签含义：', lvLgT:{ok:'没有发现问题', watch:'值得多看一眼', flag:'超出正常范围', info:'只是背景信息，不计入判断'},
+  dotLg:'名字前的圆点是买粉检测的结果：绿色表示没有发现买粉或买量的迹象，黄色表示有数据需要对方解释，红色表示多处迹象异常。',
+  cmpH:['', '这条视频', '频道平时', '对比结果'], cmpViews:'播放量', cmpLike:'点赞率（点赞/播放）', cmpCom:'评论率（评论/播放）',
+  cmpLow:(p,w)=>`只有${w}的 ${p}`, cmpSame:(p,w)=>`${w}的 ${p}，差不多`, cmpHigh:(x,w,p)=>x >= 2 ? `是${w}的 ${x.toFixed(1)} 倍` : `${w}的 ${p}`,
+  cmpLead:(k,p,w)=>k === 'low' ? `这条视频的播放量只有这位创作者${w}视频的 ${p}。` : k === 'high' ? `这条视频的播放量是这位创作者${w}视频的 ${p} 倍。` : `这条视频的播放量和这位创作者${w}视频差不多（${p}）。`,
+  cmpBase:n=>`"频道平时"是这个频道近期长视频的典型播放量（${n} 条，不含短视频和直播）。`, cmpTag:{low:w=>`低于${w}`, same:()=>'持平', high:w=>`高于${w}`},
+  cmpHP:['', '这条视频', '同期水平', '频道现在', '对比结果（和同期比）'],
+  cmpLeadP:'同期', cmpOut:'这属于一次性的爆款。给这位创作者估价时，应该参考他平时的水平。', wUsual:['平时', '平时', '平时'], wPeriod:['同期', '同期', '同期'],
+  cmpBaseP:(n,a,b)=>`"同期水平"是这条视频发布前后，这个频道 ${n} 条长视频（${a} 到 ${b}）的典型播放量。`,
+  cmpNow:n=>`"频道现在"是用最近的 ${n} 条长视频按同样方法算出来的。`, cmpRule:'明显低于平时标为低于，明显高于标为高于，差不多算持平。判定线是我定的，没有行业标准。',
+  fkTitle:'有没有买粉买量', fk:{ok:'没有发现买粉或买量的迹象', watch:'有数据需要对方解释', flag:'多处迹象指向买粉或买量', load:'正在检查频道…', info:'暂时拿不到频道数据'},
+  fkSub:(n,f,w)=>`基于公开数据的 ${n} 项检查：${f} 项异常，${w} 项需要留意。最终以创作者后台数据为准。`, chMore:'频道详情', crTitle:'这条视频和创作者其他视频比', crLoading:'正在加载创作者的频道数据…', crNone:'这条视频暂时拿不到频道数据。',
+  qTitle:'值得引用的评论', qNote:'每一类里点赞最多的那条。',
+  port:(n,views,med,cpm)=>`<span><b>${n}</b> 条视频</span><span>总播放 <b>${views}</b></span><span>想玩占比中位数 <b>${med}</b></span>` + (cpm ? `<span>综合 CPM <b>$${cpm}</b></span>` : ''),
+  roadTitle:'后续计划', road:['通过预留的平台接口接入 TikTok、Twitch 和 Instagram，前提是数据来源通过法务确认。','全网创作者背调：列出关于创作者的近期新闻和论坛讨论，只给来源，不下结论。','评论一键翻译。','每位创作者导出一页 PDF 报告。'],
+  nextTitle:'下一份 brief 的建议', nextNote:'由上面的数字按固定规则生成，用作讨论的起点。',
+  nb:{low:p=>`聊到游戏的评论占 ${p}。如果目标是曝光，这未必是问题；如果目标是转化，下一条视频可以要求让游戏成为视频的主线。`,
+    fit:'观众在聊游戏，其中不少人表示想玩。就这些评论来看，这位创作者值得考虑复投，最有力的评论可以拿来做口碑素材。',
+    comp:(p,c)=>`${p} 的评论者透露自己在玩 ${c}。可以在 brief 里要求做正面对比：这款游戏有哪些 ${c} 没有的东西。`,
+    hes:p=>`${p} 的感兴趣观众在等某件事。下次更新或调价之后再投一条跟进视频，有机会转化他们。`,
+    ad:n=>`有 ${n} 条评论反感赞助。让创作者保持自己平时的风格，并且尽早、明确地说明是赞助内容。`,
+    small:'聊到游戏的评论太少，这些建议只能作参考。',
+    b:{product:'观众在质疑功能或质量。把更新计划或修复情况提供给创作者，让下一条视频能展示出来。',price:'卡在价格上。下一条视频配合折扣或捆绑包，并给创作者带追踪的链接。',device:'观众担心自己的设备带不动。请创作者展示中等配置下的运行效果。',theme:'题材或类型劝退了一部分人。用跨类型都能懂的卖点开场，或者试一位相邻品类的创作者。',skill:'有人觉得太难。可以要求做一条新手友好的第一小时。',time:'观众说没时间。可以做短时段的角度：20 分钟能玩到什么。',awareness:'观众不清楚这是什么游戏。要求前 30 秒用一句大白话讲清楚。',prior:'观众以为要先玩前作。请创作者明确说不需要。',emotion:'有人觉得太刺激。展示更轻松的一面或难度选项。',social:'观众没人一起玩。展示单人玩法或匹配功能。',loyal:'观众已经认定了另一款游戏。把这款定位成第二款游戏，而不是替代品。'}},
+  mxTitle:'谁被什么拦住', mxNote:'行是评论者的身份，列是他们提到的门槛。点格子可以看对应的评论。',
+  rTitle:'创作者风险信号', rNote:'每个信号只是提醒你去核实。采取行动前，请先看评论原文并核对来源。',
+  rCv:'关于创作者本人的争议', rAd:'赞助引起的反感', rAdV:(d,n)=>`${d} 条反感，${n} 条提到`, rDis:'赞助声明', rDisOk:'已向 YouTube 声明付费推广', rDisBad:'观众提到了赞助，但视频没有声明付费推广', rDisNone:'没有发现赞助迹象',
+  rDup:'重复评论', rLow:'极短评论', rShare:(n,p)=>`${n} 条，占 ${p}`, rNews:c=>`搜索 ${c} 的近期新闻`, rBadge:n=>`有 ${n} 项风险信号`,
+  fDup:'重复评论', fLow:'极短评论', fLb:(l,b)=>`${l} · ${b}`,
+  fitTitle:'匹配度地图', fitX:'聊到游戏的评论占比', fitY:'想玩占比', fitNote:'每个圆圈是一条视频，大小代表播放量。虚线是当前这批视频的中位数，所以位置只在这批视频内部有意义。点圆圈可以打开对应视频。',
+  fitQ:['聊得少，意愿高','聊得多，意愿高','聊得少，意愿低','聊得多，意愿低'], fitMed:'中位数',
+  ai:m=>`以上结果由 AI 模型（${m}）分析生成，单条判断可能出错。引用某个数字前，请先点开看它背后的评论。`,
+  trBtn:'把这些评论翻译成中文', trBusy:'翻译中…', trFail:'翻译失败，请稍后再试。',
+  vsMed:d=>`比中位数${d >= 0 ? '高' : '低'} ${Math.abs(d)} 个百分点`, copyLink:'复制链接', copied:'已复制', copyQuote:'复制这条评论', remove:'从列表中移除',
+  exportTable:'导出表格', exportComments:'导出这些评论', feePh:'填写',
+  vLabel:'一句话结论',
+  v1:p=>`多数评论在聊创作者或视频本身，聊到游戏的占 ${p}。娱乐向频道通常如此。`,
+  v2:(r,i,h)=>`${r} 的评论聊到游戏。其中 ${i} 想玩，${h} 感兴趣但犹豫。`,
+  v3:(p,c)=>`${p} 的评论者透露自己在玩竞品，提到最多的是 ${c}。`,
+  v4:(b,n)=>`最常见的门槛是「${b}」（${n} 条评论）。`,
+  v5:n=>`有 ${n} 条评论反感赞助。`,
+  v6:n=>`只有 ${n} 条评论聊到游戏，百分比只能粗略参考。`,
+  tip:{rel:'已分析评论里，聊到游戏而不是只聊创作者或玩梗的占比。点击查看这些评论。',want:'游戏相关评论里，想玩、已经在玩并且满意、或明确夸游戏本身的占比。',hes:'游戏相关评论里，感兴趣但提出条件、愿望或顾虑的占比。',bar:'被提到次数最多的不玩原因。',comp:'全部已分析评论里，作者透露自己在玩竞品的占比。',ad:'全部已分析评论里，反感赞助的占比。'},
+  cHeads:['评论','点赞','态度','门槛一','门槛二','评论者','竞品','对赞助的反应','争议','置信度','依据'],
+  mEmpty:'请先粘贴一条 YouTube 视频链接。', mBad:'这不像是 YouTube 视频链接。频道链接和其他平台暂不支持。',
+  mLive:'预览版还没有接通实时分析。下面几条视频已经分析完，可以直接查看。',
+  partial:'预览数据：目前只载入了 100 条测试样本，下面的数字不是最终结果。', nodata:'没有数据，请先运行 analyze.py。',
+  paid:'已声明付费推广', small:'样本偏少', weight:'按点赞数加权',
+  meta:(v,m)=>`发布于 ${v.published} · 播放 ${big(v.views)} · 粉丝 ${big(v.subs)} · 共 ${big(v.commentCount)} 条评论，已分析 ${m.n} 条`,
+  kRel:'游戏相关度', kWant:'想玩', kHes:'犹豫', kBar:'首要门槛', kComp:'竞品玩家', kAd:'广告反感',
+  ofAll:(a,b)=>`${b} 条评论中 ${a} 条`, ofRel:(a,b)=>`${b} 条游戏相关评论中 ${a} 条`, nComments:n=>n+' 条评论',
+  noBar:'未发现', noBarD:'没有人说明门槛', adD:(d,n)=>`${d} 条反感，${n} 条提到赞助`, none:'无',
+  stance:'对游戏的态度', holding:'什么在拦住他们', noReason:'没有评论说明不玩的原因。',
+  who:'评论者是谁', noClue:(a,b)=>`${b} 条评论中有 ${a} 条看不出评论者身份。`,
+  health:'这条视频的频道健康度', vps:'播放/粉丝', lpv:'点赞/播放', cpv:'评论/播放',
+  cv:'争议信号', low:'低置信度标签', behind:'数字背后的评论', search:'在评论中搜索',
+  all:'全部', noMatch:'没有符合条件的评论。', more:n=>`显示更多（还有 ${n} 条）`, likes:'赞', lowTag:'低置信度', cvTag:'争议信号',
+  fRel:'游戏相关', fBar:'门槛：', fMention:'提到 ', fAd:'提到赞助',
+  foot:(a,b,g)=>`${a} 条视频 · 已分析 ${b} 条评论 · 数据生成于 ${g}`,
+  a:{want:'想玩',hesitant:'感兴趣但犹豫',critical:'批评游戏',unclear:'聊到游戏但没有态度',offtopic:'与游戏无关'},
+  b:{awareness:'不知道这款游戏',theme:'题材或类型',skill:'看起来太难',device:'平台或硬件',price:'价格',time:'时间',prior:'没玩过前作',emotion:'太吓人或压力大',social:'没人一起玩',product:'功能或质量',loyal:'已选择竞品'},
+  l:{fan:'老粉',competitor:'竞品玩家',newcomer:'新人',unknown:'看不出'},
+  ad:{accept:'接受赞助',neutral:'提到赞助',dislike:'反感赞助'},
+  method:m=>['数据全部来自 YouTube 官方 Data API，只用公开数据，不保存评论者的名字。',
+    `每条评论由语言模型（${m}）阅读并打标签，没有使用关键词词库，单条判断可能出错。`,
+    '留言的人只是观众里很小且不典型的一部分。这些数字适合用来对比视频和寻找原因，无法预测销量。',
+    '判定线参考了公开的行业统计和平台规则，其余是我按经验定的起点，都没有经过大样本校准。',
+    'AI 标注的准确率：在 100 条测试评论上，态度判断有 92 条和参考答案一致。']
+}};
+let lang = 'en';
+const HASH = new URLSearchParams(location.hash.slice(1));
+try { lang = HASH.get('lang') || new URLSearchParams(location.search).get('lang') || localStorage.getItem('cs-lang') || ((navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en'); } catch (e) {}
+if (!I[lang]) lang = 'en';
+let T = I[lang];
+const COLOR = {want:'var(--want)',hesitant:'var(--hesitant)',critical:'var(--critical)',unclear:'var(--unclear)',offtopic:'var(--offtopic)'};
+const ORDER = ['want','hesitant','critical','unclear','offtopic'];
+const BKEYS = Object.keys(I.en.b), LKEYS = Object.keys(I.en.l);
+const S = {tab:'overview', vid:D.videos[0] && D.videos[0].id, weighted:false, filter:null, q:'', limit:30, msg:'', sort:{k:null, dir:-1}, fees:{}};
+try { S.fees = JSON.parse(localStorage.getItem('cs-fees') || '{}') || {}; } catch (e) {}
+function fee(v) { const x = parseFloat(S.fees[v.id]); return isNaN(x) ? NaN : x; }
+function cpm(v) { const f = fee(v); return v.views && !isNaN(f) ? f / v.views * 1000 : NaN; }
+const COLS = [(v, m) => v.channel.toLowerCase(), v => v.views, v => vsCh(v), (v, m) => m.likeRate, (v, m) => m.relevance, (v, m) => m.intent, (v, m) => m.hesitant,
+  (v, m) => m.bars[0] ? m.bars[0].n : 0, (v, m) => m.competitor, (v, m) => m.adDislike, v => fee(v), v => cpm(v)];
+const CHM = {}; try { Object.assign(CHM, JSON.parse(sessionStorage.getItem('cs-chm3') || '{}')); } catch (e) {}
+function baseline(ch) {
+  const st = chStats(ch), pv = ch.period && ch.period.found && ch.period.videos.length ? chStats({videos: ch.period.videos}) : null, use = !!(pv && pv.L.length >= 5);
+  return {st, pv, use, base: use ? pv : st};
+}
+function vsCh(v) { const c = CHM[v.id]; return c && c.med && v.views ? v.views / c.med : NaN; }
+async function loadMedians() {
+  if (!API || S.chmBusy) return; S.chmBusy = true;
+  for (;;) {
+    const v = D.videos.find(x => CHM[x.id] === undefined || (CHM[x.id] && CHFULL[x.id] === undefined)); if (!v) break;   // 每次重新找，后来加入的视频也会被处理
+    try {
+      const r = await fetch(API + '/api/channel', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({url: 'https://www.youtube.com/watch?v=' + v.id})}), ch = await r.json();
+      if (r.ok && Array.isArray(ch.videos)) { const b = baseline(ch); CHM[v.id] = {med: b.base.med, n: b.base.L.length, inS: ch.videos.some(x => x.id === v.id), per: b.use}; CHFULL[v.id] = ch; } else CHM[v.id] = null;
+    } catch (e) { CHM[v.id] = null; }
+    try { sessionStorage.setItem('cs-chm3', JSON.stringify(CHM)); } catch (e) {}
+    renderCompare(); if (v.id === S.vid && !(document.activeElement && document.activeElement.id === 'q')) renderDetail();
+  }
+  S.chmBusy = false;
+}
+function sorted() {
+  const rows = D.videos.map(v => ({v, m: metrics(v, S.weighted)}));
+  if (S.sort.k != null) {
+    const g = COLS[S.sort.k], d = S.sort.dir;
+    rows.sort((a, b) => { const x = g(a.v, a.m), y = g(b.v, b.m);
+      if (typeof x === 'string') return x.localeCompare(y) * d;
+      return (x == null || isNaN(x)) ? 1 : (y == null || isNaN(y)) ? -1 : (x - y) * d; });
+  }
+  return rows;
+}
+function currentList() {
+  const v = D.videos.find(x => x.id === S.vid); if (!v) return [];
+  const q = S.q.trim().toLowerCase();
+  return v.comments.filter(c => match(c, S.filter) && (!q || c.t.toLowerCase().includes(q))).sort((a, b) => b.k - a.k);
+}
+function verdict(v, m, J) {
+  const s = [], top = m.bars[0], comp = m.comps[0]; J = J || judged(v, m); const vk = J && J !== 'loading' ? J.verdict : [];
+  if (!vk.length) s.push(T.v2(pct(m.relevance), pct(m.intent), pct(m.hesitant)));
+  vk.forEach(k => { if (k === 'v1') s.push(T.v1(pct(m.relevance))); else if (k === 'v2') s.push(T.v2(pct(m.relevance), pct(m.intent), pct(m.hesitant))); else if (k === 'v3' && comp) s.push(T.v3(pct(m.competitor), comp[0])); else if (k === 'v4' && top) s.push(T.v4(T.b[top.key], top.n)); else if (k === 'v5') s.push(T.v5(m.nDislike)); });
+  if (!isNaN(vsCh(v))) s.push(T.v7(vsCh(v).toFixed(2)));
+  if (vk.includes('v6')) s.push(T.v6(m.nRel));
+  return s.join(' ');
+}
+function audit(v) {
+  if (v._aud) return;
+  const cnt = {}, norm = c => c.t.toLowerCase().replace(/[^a-z0-9一-龥 ]+/g, '').replace(/\s+/g, ' ').trim();
+  const ns = v.comments.map(norm); ns.forEach(n => { if (n.length >= 15) cnt[n] = (cnt[n] || 0) + 1; });
+  v.comments.forEach((c, i) => { c._d = ns[i].length >= 15 && cnt[ns[i]] > 1 ? 1 : 0; c._l = ns[i].split(' ').filter(Boolean).length <= 2 ? 1 : 0; });
+  v._aud = 1;
+}
+// 判定线都在后端：网页把数字发过去，拿回「正常 / 留意 / 异常」和要显示哪几条
+const JUD = {};
+function judgeIn(v, m) {
+  audit(v);
+  const nd = v.comments.filter(c => c._d).length, nl = v.comments.filter(c => c._l).length, top = m.bars[0], ch = CHFULL[v.id];
+  return {m: {n: m.n, nCv: m.nCv, nDislike: m.nDislike, nAd: m.nAd, paid: !!v.paid, said: m.nAd > 0 || /#ad\b|#spon|sponsored/i.test(v.title), nd, nl, nLow: m.nLow,
+    relevance: m.relevance, intent: m.intent, topN: top ? top.n : 0, competitor: m.competitor, hasComp: !!m.comps[0], hesitant: m.hesitant, nHes: m.att.hesitant.n, nRel: m.nRel},
+    chLv: ch && ch !== 'loading' && ch.judge ? chSignals(ch, chStats(ch)).slice(0, 6).map(x => x.lv) : null, cmp: cmpRatios(v, m)};
+}
+function cmpRatios(v, m) {
+  const ch = CHFULL[v.id]; if (!ch || ch === 'loading') return null;
+  const bs = baseline(ch).base, r4 = x => isFinite(x) ? Math.round(x * 1e4) / 1e4 : null;
+  return [r4(v.views / bs.med), r4(m.likeRate / bs.medLike), r4(m.commentRate / bs.medCom)];
+}
+function judgeFetch(key) {
+  if (JUD[key] !== undefined && JUD[key] !== 'loading') return Promise.resolve(JUD[key]);
+  if (JUD[key + '#p']) return JUD[key + '#p'];
+  JUD[key] = 'loading';
+  return JUD[key + '#p'] = fetch(API + '/api/judge', {method:'POST', headers:{'content-type':'application/json'}, body: key}).then(r => r.ok ? r.json() : null).catch(() => null)
+    .then(x => { JUD[key] = x && x.risk ? x : null; delete JUD[key + '#p']; return JUD[key]; });
+}
+let judgeTick = 0;
+function judged(v, m) {
+  if (!API) return null;
+  const key = JSON.stringify(judgeIn(v, m));
+  if (JUD[key] === undefined) { judgeFetch(key).then(() => { clearTimeout(judgeTick); judgeTick = setTimeout(() => { renderCompare(); if (!(document.activeElement && document.activeElement.id === 'q')) renderDetail(); }, 30); }); return 'loading'; }
+  return JUD[key];
+}
+const jlv = (J, k) => J === 'loading' ? 'load' : J ? J.risk[k] : 'info';
+function risk(v, m) {
+  audit(v);
+  const n = m.n || 1, nd = v.comments.filter(c => c._d).length, nl = v.comments.filter(c => c._l).length, said = m.nAd > 0 || /#ad\b|#spon|sponsored/i.test(v.title), J = judged(v, m);
+  return [
+    {label: T.rCv, value: T.nComments(m.nCv), lv: jlv(J, 'cv'), f: 'cv:1'},
+    {label: T.rAd, value: T.rAdV(m.nDislike, m.nAd), lv: jlv(J, 'ad'), f: 'ad:any'},
+    {label: T.rDis, value: v.paid ? T.rDisOk : said ? T.rDisBad : T.rDisNone, lv: jlv(J, 'dis'), f: v.paid ? '' : said ? 'ad:any' : ''},
+    {label: T.rDup, value: T.rShare(nd, pct(nd / n)), lv: jlv(J, 'dup'), f: 'dupc:1'},
+    {label: T.rLow, value: T.rShare(nl, pct(nl / n)), lv: jlv(J, 'short'), f: 'low:1'},
+    {label: T.low, value: T.nComments(m.nLow), lv: jlv(J, 'low'), f: 'cf:low'}
+  ];
+}
+function brief(v, m) {
+  const out = [], top = m.bars[0], comp = m.comps[0], J = judged(v, m);
+  if (!J || J === 'loading') return out;
+  J.brief.forEach(k => {
+    if (k === 'low') out.push(T.nb.low(pct(m.relevance))); else if (k === 'fit') out.push(T.nb.fit);
+    else if (k === 'bar' && top && T.nb.b[top.key]) out.push(T.nb.b[top.key]); else if (k === 'comp' && comp) out.push(T.nb.comp(pct(m.competitor), comp[0]));
+    else if (k === 'hes') out.push(T.nb.hes(pct(m.hesitant))); else if (k === 'ad') out.push(T.nb.ad(m.nDislike)); else if (k === 'small') out.push(T.nb.small);
+  });
+  return out;
+}
+const median = a => { const s = a.filter(x => !isNaN(x)).sort((x, y) => x - y); return s.length ? (s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2) : NaN; };
+function vsMedian(key, val) {
+  if (D.videos.length < 3 || isNaN(val)) return '';
+  const md = median(D.videos.map(x => metrics(x, S.weighted)[key])), d = Math.round((val - md) * 100);
+  return isNaN(md) || d === 0 ? '' : ' · ' + T.vsMed(d);
+}
+function fitMap() {
+  const pts = D.videos.map(v => ({v, m: metrics(v, S.weighted)})).filter(p => !isNaN(p.m.intent) && !isNaN(p.m.relevance));
+  if (pts.length < 3) return '';
+  const W = 780, H = 410, L = 58, R = 74, Tp = 34, Bt = 50, pw = W - L - R, ph = H - Tp - Bt, xs = pts.map(p => p.m.relevance), ys = pts.map(p => p.m.intent);
+  const dom = a => { let lo = Math.min(...a), hi = Math.max(...a); const pad = Math.max(.1, (hi - lo) * .25); lo = Math.max(0, Math.floor((lo - pad) * 10) / 10); hi = Math.min(1, Math.ceil((hi + pad) * 10) / 10); if (hi - lo < .3) { lo = Math.max(0, lo - .1); hi = Math.min(1, hi + .1); } return [lo, hi]; };
+  const [x0, x1] = dom(xs), [y0, y1] = dom(ys), X = x => L + (x - x0) / (x1 - x0) * pw, Y = y => Tp + (1 - (y - y0) / (y1 - y0)) * ph, mx = median(xs), my = median(ys), mv = Math.max(...pts.map(p => p.v.views || 1));
+  let g = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${T.fitTitle}"><rect x="${L}" y="${Tp}" width="${pw}" height="${ph}" fill="#fff" stroke="#1b1530" stroke-width="2"/>`;
+  for (let k = 0; k <= 4; k++) {
+    const tx = x0 + (x1 - x0) * k / 4, ty = y0 + (y1 - y0) * k / 4;
+    if (k > 0 && k < 4) g += `<line x1="${X(tx)}" y1="${Tp}" x2="${X(tx)}" y2="${Tp + ph}" stroke="#ece3cf"/><line x1="${L}" y1="${Y(ty)}" x2="${L + pw}" y2="${Y(ty)}" stroke="#ece3cf"/>`;
+    g += `<text x="${X(tx)}" y="${Tp + ph + 18}" fill="#5c5474" font-size="11.5" text-anchor="middle">${Math.round(tx * 100)}%</text><text x="${L - 10}" y="${Y(ty) + 4}" fill="#5c5474" font-size="11.5" text-anchor="end">${Math.round(ty * 100)}%</text>`;
+  }
+  g += `<line x1="${X(mx)}" y1="${Tp}" x2="${X(mx)}" y2="${Tp + ph}" stroke="#9a90b5" stroke-dasharray="4 5"/><line x1="${L}" y1="${Y(my)}" x2="${L + pw}" y2="${Y(my)}" stroke="#9a90b5" stroke-dasharray="4 5"/>` +
+    `<text class="ql" x="${X(mx)}" y="${Tp - 10}" text-anchor="middle">${T.fitMed} ${pct(mx)}</text><text class="ql" x="${L + pw + 8}" y="${Y(my) - 2}">${T.fitMed}</text><text class="ql" x="${L + pw + 8}" y="${Y(my) + 12}">${pct(my)}</text>`;
+  [[L + 12, Tp + 20, 'start', 0], [L + pw - 12, Tp + 20, 'end', 1], [L + 12, Tp + ph - 12, 'start', 2], [L + pw - 12, Tp + ph - 12, 'end', 3]].forEach(([x, y, a, i]) => { g += `<text class="ql" x="${x}" y="${y}" text-anchor="${a}" style="paint-order:stroke;stroke:#fff;stroke-width:6px">${T.fitQ[i]}</text>`; });
+  g += `<text x="${L + pw / 2}" y="${H - 8}" fill="#1b1530" font-size="12.5" text-anchor="middle">${T.fitX}</text><text transform="translate(15 ${Tp + ph / 2}) rotate(-90)" fill="#1b1530" font-size="12.5" text-anchor="middle">${T.fitY}</text>`;
+  // 先定圆圈位置，再给每个名字找一个不压住别的圆圈和名字的位置
+  const nodes = pts.sort((a, b) => (b.v.views || 0) - (a.v.views || 0)).map(p => ({p, x: X(p.m.relevance), y: Y(p.m.intent), r: 7 + 16 * Math.sqrt((p.v.views || 1) / mv), w: 7.1 * p.v.channel.length + 4}));
+  const boxes = nodes.map(n => [n.x - n.r, n.y - n.r, n.x + n.r, n.y + n.r]), hit = (a, b) => a[0] < b[2] && a[2] > b[0] && a[1] < b[3] && a[3] > b[1];
+  nodes.forEach((n, i) => {
+    const c = [[n.x + n.r + 7, n.y - 8, 'start'], [n.x - n.r - 7 - n.w, n.y - 8, 'start'], [n.x - n.w / 2, n.y - n.r - 22, 'start'], [n.x - n.w / 2, n.y + n.r + 6, 'start'], [n.x + n.r + 5, n.y - n.r - 16, 'start'], [n.x - n.r - 5 - n.w, n.y + n.r, 'start']];
+    let best = c[0];
+    for (const k of c) { const b = [k[0], k[1], k[0] + n.w, k[1] + 16]; if (b[0] >= L + 2 && b[2] <= L + pw - 2 && b[1] >= Tp + 2 && b[3] <= Tp + ph - 2 && !boxes.some((o, j) => j !== i && hit(b, o))) { best = k; break; } }
+    n.lx = best[0]; n.ly = best[1] + 12; boxes.push([best[0], best[1], best[0] + n.w, best[1] + 16]);
+  });
+  nodes.forEach(n => { const on = n.p.v.id === S.vid;
+    g += `<circle data-vid2="${n.p.v.id}" cx="${n.x}" cy="${n.y}" r="${n.r}" fill="rgba(${on ? '106,87,201' : '27,21,48'},${on ? .95 : .08})" stroke="${on ? '#1b1530' : '#1b1530'}" stroke-width="${on ? 0 : 1.2}"><title>${esc(n.p.v.channel)}: ${pct(n.p.m.relevance)} / ${pct(n.p.m.intent)}</title></circle>`; });
+  nodes.forEach(n => { const on = n.p.v.id === S.vid;
+    g += `<text data-vid2="${n.p.v.id}" x="${n.lx}" y="${n.ly}" fill="#1b1530" font-size="12.5" font-weight="${on ? 700 : 500}" style="cursor:pointer;paint-order:stroke;stroke:#fff;stroke-width:4px">${esc(n.p.v.channel)}</text>`; });
+  return `<div class="fit"><h2>${T.fitTitle}</h2>${g}</svg><div class="note">${T.fitNote}</div></div>`;
+}
+function shareUrl() {
+  const h = 'v=' + S.vid + '&t=' + S.tab + (S.filter ? '&f=' + encodeURIComponent(S.filter.k + ':' + S.filter.v) : '') + '&lang=' + lang;
+  return location.href.split('#')[0].split('?')[0] + '#' + h;
+}
+function copyText(text, btn) {
+  const done = () => { if (btn) { const o = btn.textContent; btn.textContent = T.copied; setTimeout(() => { btn.textContent = o; }, 1400); } };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, () => {});
+  else { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} ta.remove(); }
+}
+async function translateShown() {
+  if (S.trBusy) return;
+  const v = D.videos.find(x => x.id === S.vid); if (!v) return;
+  const qs = ['want', 'hesitant', 'critical'].map(a => v.comments.filter(c => c.a === a && c.t.length >= 25).sort((x, y) => y.k - x.k)[0]).filter(Boolean);
+  const todo = [...new Set(qs.concat(currentList().slice(0, S.limit)))].filter(c => !c._zh).slice(0, 40); if (!todo.length) return;
+  S.trBusy = true; S.trErr = false; renderDetail();
+  try {
+    const r = await fetch(API + '/api/translate', {method:'POST', headers: PW ? {'content-type':'application/json', Authorization:'Bearer ' + PW} : {'content-type':'application/json'}, body: JSON.stringify({texts: todo.map(c => c.t)})});
+    const j = await r.json(); if (!r.ok || !Array.isArray(j.translations) || j.translations.length !== todo.length) throw new Error('bad');
+    todo.forEach((c, i) => { c._zh = String(j.translations[i]).replace(/^\s*\d+[.、:：]\s*/, ''); }); if (v.live) saveAdded();
+  } catch (e) { S.trErr = true; }
+  S.trBusy = false; renderDetail();
+  fetch(API + '/api/quota').then(r => r.ok ? r.json() : null).then(q => { if (q && typeof q.limit === 'number') { S.quota = q; renderStatic(); } }).catch(() => {});
+}
+function chStats(ch) {
+  const now = Date.now(), all = ch.videos.map(v => ({...v, age: (now - Date.parse(v.published)) / 864e5, lr: v.likes != null && v.views ? v.likes / v.views : NaN, cr: v.comments != null && v.views ? v.comments / v.views : NaN}));
+  let L = all.filter(v => !v.live && v.dur > 180 && v.age >= 3 && v.views != null); if (L.length < 5) L = all.filter(v => v.age >= 3 && v.views != null);
+  L.sort((a, b) => Date.parse(a.published) - Date.parse(b.published));
+  const med = median(L.map(v => v.views)), medLike = median(L.map(v => v.lr)), medCom = median(L.map(v => v.cr)), sp = L.filter(v => v.paid), org = L.filter(v => !v.paid);
+  const J = ch.judge || {}, SP = new Set(J.spikes || []), OUT = new Set(J.outliers || []);
+  L.forEach(v => { v.x = med ? v.views / med : NaN; v.spike = SP.has(v.id); v.out = OUT.has(v.id); });
+  return {all, L, med, medLike, medCom, sp, org, spikes: L.filter(v => v.spike), within: typeof J.within === 'number' ? J.within : NaN,
+    top: med ? Math.max(...L.map(v => v.views)) / med : NaN, reach: ch.subs ? med / ch.subs : NaN, last: all.length ? Math.round(Math.min(...all.map(v => v.age))) : NaN, recent: all.filter(v => v.age <= 90).length,
+    spV: sp.length >= 2 && org.length >= 3 ? median(sp.map(v => v.views)) / median(org.map(v => v.views)) : NaN, spL: sp.length >= 2 && org.length >= 3 ? median(sp.map(v => v.lr)) / median(org.map(v => v.lr)) : NaN};
+}
+function chSignals(ch, st) {
+  const C = T.cs, rows = [], jl = (ch.judge && ch.judge.lv) || {}, g = k => jl[k] || 'info';
+  rows.push(ch.subs == null ? {label: C.reach, value: C.reachH, lv: 'info'} : {label: C.reach, value: C.reachV(pct(st.reach, st.reach < .1 ? 1 : 0), st.L.length) + ' ' + C.reachT(), lv: g('reach')});
+  rows.push({label: C.steady, value: C.steadyV(pct(st.within), st.top.toFixed(1)), lv: g('steady')});
+  rows.push({label: C.spike, value: C.spikeV(st.spikes.length), lv: g('spike')});
+  rows.push({label: C.like, value: C.likeV(pct(st.medLike, 2)) + (isNaN(st.medLike) ? '' : ' ' + C.likeT()), lv: g('like')});
+  rows.push({label: C.com, value: C.comV(pct(st.medCom, 3)) + (isNaN(st.medCom) ? '' : ' ' + C.comT()), lv: g('com')});
+  rows.push(isNaN(st.spV) ? {label: C.spo, value: C.spoN(st.sp.length), lv: 'info'} : {label: C.spo, value: C.spoV(pct(st.spV), pct(st.spL)), lv: g('spo')});
+  rows.push({label: C.act, value: C.actV(st.last, st.recent), lv: g('act')});
+  return rows;
+}
+function chChart(st) {
+  const V = st.L.slice(-30); if (V.length < 3) return '';
+  const W = 780, H = 230, L = 52, R = 12, Tp = 12, Bt = 26, pw = W - L - R, ph = H - Tp - Bt, mx = Math.max(...V.map(v => v.views), 1), Y = x => Tp + ph - Math.sqrt(x / mx) * ph, bw = pw / V.length;
+  let g = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${T.chChart}">`;
+  [mx, mx / 4].forEach(t => { g += `<line x1="${L}" y1="${Y(t)}" x2="${L + pw}" y2="${Y(t)}" stroke="#ece3cf"/><text x="${L - 8}" y="${Y(t) + 4}" fill="#5c5474" font-size="11" text-anchor="end">${big(Math.round(t))}</text>`; });
+  V.forEach((v, i) => { const y = Y(v.views), c = v.spike ? 'var(--critical)' : v.paid ? '#6a57c9' : 'rgba(27,21,48,.22)';
+    g += `<rect x="${L + i * bw + bw * .14}" y="${y}" width="${bw * .72}" height="${Math.max(1, Tp + ph - y)}" rx="2" fill="${c}"><title>${esc(v.title)} · ${big(v.views)} · ${pct(v.lr, 2)}</title></rect>`; });
+  g += `<line x1="${L}" y1="${Y(st.med)}" x2="${L + pw}" y2="${Y(st.med)}" stroke="#1b1530" stroke-dasharray="4 5"/><text x="${L - 8}" y="${Y(st.med) + 4}" fill="#1b1530" font-size="11" text-anchor="end">${big(Math.round(st.med))}</text>` +
+    `<text x="${L}" y="${H - 6}" fill="#5c5474" font-size="11">${V[0].published.slice(0, 10)}</text><text x="${L + pw}" y="${H - 6}" fill="#5c5474" font-size="11" text-anchor="end">${V[V.length - 1].published.slice(0, 10)}</text></svg>`;
+  return `<div class="sub2">${T.chChart}</div><div class="chart">${g}</div><div class="lgd"><span><i style="background:rgba(27,21,48,.22)"></i>${T.chLg[0]}</span><span><i style="background:#6a57c9"></i>${T.chLg[1]}</span><span><i style="background:var(--critical)"></i>${T.chLg[2]}</span></div><div class="note">${T.chChartNote}</div>`;
+}
+function chTable(title, rows) {
+  if (!rows.length) return '';
+  return `<div class="sub2">${title}</div><div class="scroll"><table class="chv"><thead><tr>${T.chH.map(h => '<th>' + h + '</th>').join('')}</tr></thead><tbody>` +
+    rows.slice(0, 8).map(v => `<tr><td class="tt"><a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">${esc(v.title)}</a></td><td>${v.published.slice(0, 10)}</td><td>${big(v.views)}</td><td>${isNaN(v.x) ? 'n/a' : v.x.toFixed(1) + 'x'}</td><td>${pct(v.lr, 2)}</td><td><button class="ghost" data-an="${v.id}">${T.chAn}</button></td></tr>`).join('') + `</tbody></table></div>`;
+}
+function fkLevel(rows, k) { return k ? {...k, rows} : {lv: 'info', f: 0, w: 0, n: rows.length, rows}; }
+function fakeCheck(v, m) {
+  const ch = CHFULL[v.id]; if (!ch || ch === 'loading') return {lv: ch === null || !API ? 'info' : 'load', rows: []};
+  const rows = chSignals(ch, chStats(ch)).slice(0, 6); audit(v); const nd = v.comments.filter(c => c._d).length, n = v.comments.length || 1;
+  const J = judged(v, m || metrics(v, S.weighted));
+  rows.push({label: T.rDup, value: T.rShare(nd, pct(nd / n)), lv: jlv(J, 'dup')});
+  return J === 'loading' ? {lv: 'load', rows} : fkLevel(rows, J && J.fk);
+}
+const fkHead = k => `<div class="fk ${k.lv}"><i></i><div><b>${T.fk[k.lv]}</b>${k.rows.length ? `<span>${T.fkSub(k.n, k.f, k.w)}</span>` : ''}</div></div>`;
+const lvTag = lv => `<em class="lt ${lv}">${T.lvN[lv] || ''}</em>`;
+const lvLegend = () => `<div class="lgd2"><span>${T.lvLg}</span>${['ok', 'watch', 'flag', 'info'].map(k => `<span>${lvTag(k)} ${T.lvLgT[k]}</span>`).join('')}</div>`;
+const SRC = {vs:'https://www.overseeros.com/blog/youtube-views-to-subscriber-ratio', cm:'https://www.overseeros.com/blog/good-comment-to-view-ratio-youtube', lr:'https://www.overseeros.com/blog/good-like-to-view-ratio-youtube', lk:'https://upgrowth.in/social-media-tools/youtube-engagement-rate-calculator/', yt:'https://support.google.com/youtube/answer/3399767', asa:'https://www.asa.org.uk/resource/influencers-guide.html'};
+const lnk = (k, t) => `<a href="${SRC[k]}" target="_blank" rel="noopener">${t}</a>`;
+const BENCH = {
+ zh: {btn:'查看判定说明', hide:'收起判定说明', H:['检查项','看什么','依据'], tag:{a:'自定假设', ref:'有参考数据', off:'官方规则'},
+  fake: [
+   ['粉丝真的在看吗','普通视频的播放量和粉丝数比，再和同规模频道比','ref','参考了公开的行业统计。'],
+   ['播放量稳定吗','大部分视频的播放量是不是落在这个频道的正常范围里','a','我按经验定的起点。'],
+   ['播放高但点赞跟不上','有没有视频播放异常高、点赞率却异常低','a','买来的播放通常不会带来同比例的点赞。'],
+   ['点赞率','点赞 ÷ 播放，和同量级的视频比','ref','参考了公开的行业统计。'],
+   ['评论率','评论 ÷ 播放，和同量级的视频比','ref','参考了公开的行业统计。'],
+   ['赞助视频和平时比','声明了赞助的视频，播放和点赞率比平时差多少','a','赞助标记来自 YouTube 的付费推广声明。'],
+   ['重复评论','一字不差的重复评论占多少','a','我按经验定的起点。'],
+   ['总结论','把上面几项合起来看','a',`规则是我定的。${lnk('yt','YouTube 虚假互动政策')}只规定了什么行为违规，没有给出数字标准。`]],
+  risk: [
+   ['争议提及','有没有评论提到创作者的争议','a','AI 判断，建议点开原评论核对。'],
+   ['广告反感','有没有评论反感这次赞助','a','AI 判断。'],
+   ['赞助披露','视频有没有 YouTube 的付费推广声明','off',`${lnk('asa','英国 ASA、CAP 和 CMA 的网红广告指南')}要求广告必须清楚标明，品牌和创作者都有责任。`],
+   ['重复评论','同上','a','我按经验定的起点。'],
+   ['极短评论','只有一两个词的评论是不是过多','a','短评论本身很常见，所以只在明显偏多时提示。'],
+   ['AI 把握低','AI 自己没把握的评论是不是偏多','a','偏多时，这条视频的结果需要人工复核。']],
+  more:'每项看什么、依据是什么，见这三张表：', go:{read:'评论指标', fake:'买粉检测', risk:'风险信号'},
+  readH:['指标','看什么','依据'],
+  read: [
+   ['游戏相关度','聊到游戏的评论占全部已分析评论的比例','a','没有行业基准，只和同一批视频比。'],
+   ['想玩','想玩、在玩且满意、或明确夸游戏的评论，占游戏相关评论的比例','a','没有行业基准。'],
+   ['犹豫','感兴趣但提了条件或顾虑的评论，占游戏相关评论的比例','a','没有行业基准。'],
+   ['首要门槛','被提到最多的不玩原因','a','要有好几条评论提到，才会写进结论。'],
+   ['竞品玩家','透露自己在玩其他系列游戏的评论占比','a','同系列前作的玩家算老粉，不算竞品。'],
+   ['广告反感','反感这次赞助的评论占比','a','没有行业基准。'],
+   ['样本偏少','游戏相关评论太少时会提示','a','条数太少时，百分比波动很大。'],
+   ['相对频道','这条视频的播放量和创作者同期长视频的典型播放量比','a','判定线是我定的，没有行业标准。'],
+   ['CPM','你填的报价 ÷ 播放量 × 1000','a','赞助报价不公开，所以只在这批视频之间比较。'],
+   ['按点赞数加权','勾选后，点赞多的评论权重更高','a','用来看被很多人认同的观点占多大比重。'],
+   ['分析哪些评论','每条视频最多 300 条一级评论，按 YouTube 的相关度排序，不含回复','off','排序由 YouTube 决定，偏向热门评论，和随机抽样有差别。'],
+   ['AI 标注准确率','在 100 条测试评论上和参考答案比对','a','态度判断 92 条一致，不玩原因 99 条一致。测试做在提示词最后一次修改之前。']],
+  readNote:'评论指标没有外部基准可以对照。一个数字好不好，只能和同一批里的其他视频比，或者和同一位创作者的其他赞助视频比。',
+  note:'这些判定线大多是我按经验定的起点，没有经过大样本校准。单项亮黄不代表有问题，是提醒你去问问创作者。'},
+ en: {btn:'What each check looks at', hide:'Hide the checks', H:['Check','What it looks at','Basis'], tag:{a:'My assumption', ref:'Reference data', off:'Official rule'},
+  fake: [
+   ['Do subscribers actually watch?','Typical views against subscriber count, compared with channels of a similar size','ref','Based on published industry figures.'],
+   ['Are views steady?','Whether most videos land in the channel\'s normal range','a','A starting point I set by judgement.'],
+   ['Views that outrun the likes','Videos with unusually high views and an unusually low like rate','a','Bought views rarely bring likes in proportion.'],
+   ['Like rate','Likes per view, compared with videos of a similar scale','ref','Based on published industry figures.'],
+   ['Comment rate','Comments per view, compared with videos of a similar scale','ref','Based on published industry figures.'],
+   ['Sponsored videos against the rest','How far declared sponsored videos fall behind the usual views and like rate','a','The sponsored label comes from YouTube\'s paid promotion declaration.'],
+   ['Repeated comments','Share of comments that are word for word the same','a','A starting point I set by judgement.'],
+   ['Overall verdict','All the checks above taken together','a',`The rule is mine. ${lnk('yt','YouTube\'s fake engagement policy')} says what is banned and gives no numbers.`]],
+  risk: [
+   ['Controversy','Comments that mention a controversy about the creator','a','Labelled by AI. Open the comments to check.'],
+   ['Ad pushback','Comments that dislike this sponsorship','a','Labelled by AI.'],
+   ['Sponsorship disclosure','Whether the video carries YouTube\'s paid promotion declaration','off',`The ${lnk('asa','ASA, CAP and CMA influencer guidance')} says ads must be clearly labelled, and both brand and creator are responsible.`],
+   ['Repeated comments','As above','a','A starting point I set by judgement.'],
+   ['Very short comments','Whether one or two word comments make up too much of the sample','a','Short comments are common, so this only shows when they clearly dominate.'],
+   ['Low AI confidence','Whether the AI was unsure about too many comments','a','When it was, check this video\'s results by hand.']],
+  more:'What each check looks at and what it is based on:', go:{read:'Comment metrics', fake:'Fake check', risk:'Risk signals'},
+  readH:['Metric','What it looks at','Basis'],
+  read: [
+   ['About the game','Share of analysed comments that talk about the game','a','No industry benchmark. Compared within the current set only.'],
+   ['Want to play','Comments that want to play, play and like it, or clearly praise the game, as a share of game comments','a','No industry benchmark.'],
+   ['Hesitant','Interested comments that name a condition or worry, as a share of game comments','a','No industry benchmark.'],
+   ['Top barrier','The reason for not playing that comes up most','a','It needs several comments behind it before it goes into the summary.'],
+   ['Competitor players','Share of comments that show they play another series','a','Players of earlier games in the same series count as fans.'],
+   ['Ad pushback','Share of comments that dislike this sponsorship','a','No industry benchmark.'],
+   ['Small sample','A warning when too few comments talk about the game','a','Percentages swing a lot on a small count.'],
+   ['Against the channel','This video\'s views against the creator\'s typical long video views from the same period','a','I set the lines myself. There is no industry standard.'],
+   ['CPM','Your fee divided by views, times 1,000','a','Sponsorship fees are private, so videos are only compared within the set.'],
+   ['Weight by likes','When ticked, comments with more likes count for more','a','Shows how much weight widely shared views carry.'],
+   ['Which comments','Up to 300 top-level comments per video, in YouTube\'s relevance order, no replies','off','YouTube decides the order. It favours popular comments, so this is not a random sample.'],
+   ['Label accuracy','Checked against a reference answer on 100 test comments','a','Stance matched for 92, barrier for 99. The test was run before the last change to the prompt.']],
+  readNote:'There is no outside benchmark for the comment metrics. A number is only good or bad next to other videos in the same set, or next to the same creator\'s other sponsored videos.',
+  note:'Most of these lines are starting points I set by judgement. None is calibrated on a large sample. One amber label is no proof of a problem. It is a reason to ask the creator.'}
+};
+const benchBtn = k => `<button class="ghost" data-bench="${k}">${S.bench && S.bench[k] ? BENCH[lang].hide : BENCH[lang].btn}</button>`;
+const benchHTML = k => { if (!(S.bench && S.bench[k])) return ''; const B = BENCH[lang], H = B[k + 'H'] || B.H;
+  return `<div class="bench"><div class="scroll"><table><thead><tr>${H.map(h => '<th>' + h + '</th>').join('')}</tr></thead><tbody>` +
+    B[k].map(x => { const n = x.length - 2; return '<tr>' + x.slice(0, n).map((c, i) => `<td${i === 1 ? ' class="how"' : ''}>${c}</td>`).join('') + `<td class="src"><em class="bz ${x[n]}">${B.tag[x[n]]}</em>${x[n + 1]}</td></tr>`; }).join('') + `</tbody></table></div><p>${B[k + 'Note'] || B.note}</p></div>`; };
+const fkRows = rows => lvLegend() + `<div class="rk">${rows.map(x => `<div class="rr"><div><b>${x.label}${lvTag(x.lv)}</b><span>${x.value}</span></div></div>`).join('')}</div>`;
+function channelHTML(ch, standalone) {
+  const st = chStats(ch), n = st.L.length;
+  const k = fkLevel(chSignals(ch, st).slice(0, 6), ch.judge && ch.judge.fk);
+  return `<div class="card${standalone ? ' key' : ''}"><div class="hrow"><h2>${standalone ? T.fkTitle : T.chMore}</h2>${standalone ? `<div class="acts">${benchBtn('fake')}<button class="ghost" id="chclose">${T.chClose}</button></div>` : ''}</div>
+    <div class="vhead"><div><h3>${esc(ch.title)}</h3><div class="meta">${esc(T.chMeta(ch))}</div></div></div>${standalone ? '<div style="margin-top:16px">' + fkHead(k) + benchHTML('fake') + '</div>' : ''}
+    <div class="tiles">
+      <div class="tile"><div class="k">${T.chK[0]}</div><div class="v">${ch.subs == null ? 'n/a' : big(ch.subs)}</div><div class="d">${ch.subs == null ? T.chD.hidden : ''}</div></div>
+      <div class="tile"><div class="k">${T.chK[1]}</div><div class="v">${big(Math.round(st.med))}</div><div class="d">${T.chD.base(n)}</div></div>
+      <div class="tile"><div class="k">${T.chK[2]}</div><div class="v">${pct(st.reach, st.reach < .1 ? 1 : 0)}</div><div class="d">${T.chD.base(n)}</div></div>
+      <div class="tile"><div class="k">${T.chK[3]}</div><div class="v">${pct(st.medLike, 2)}</div><div class="d">${T.chD.base(n)}</div></div>
+      <div class="tile"><div class="k">${T.chK[4]}</div><div class="v">${pct(st.medCom, 3)}</div><div class="d">${T.chD.base(n)}</div></div>
+      <div class="tile"><div class="k">${T.chK[5]}</div><div class="v">${st.sp.length}</div><div class="d">${T.chD.sp(st.sp.length, n)}</div></div>
+    </div>
+    ${standalone ? `<div class="sub2">${T.chSig}</div>${fkRows(chSignals(ch, st))}<div class="note">${T.chNote} ${T.chNoAi}</div>` : ''}
+    ${chChart(st)}${chTable(T.chOut, st.spikes.concat(st.L.filter(v => v.out)).sort((a, b) => b.views - a.views))}${chTable(T.chSp, st.sp.slice().reverse())}
+    <div class="sub2">${T.chAsk}</div><ul class="nb">${T.chAskL.map(x => '<li>' + x + '</li>').join('')}</ul></div>`;
+}
+function renderChannel() { document.getElementById('channel').innerHTML = S.ch ? channelHTML(S.ch, true) : ''; }
+const CHFULL = {};
+async function ensureChannel(v) {
+  if (CHFULL[v.id] !== undefined || !API) return; CHFULL[v.id] = 'loading';
+  try {
+    const r = await fetch(API + '/api/channel', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({url: 'https://www.youtube.com/watch?v=' + v.id})}), ch = await r.json();
+    CHFULL[v.id] = r.ok && Array.isArray(ch.videos) ? ch : null;
+  } catch (e) { CHFULL[v.id] = null; }
+  renderCompare(); if (S.vid === v.id && !(document.activeElement && document.activeElement.id === 'q')) renderDetail();
+}
+async function channelCheck(u) {
+  if (S.busy) return; if (!API) { S.msg = 'mLive'; return renderStatic(); }
+  const btn = document.getElementById('go'); S.busy = true; btn.disabled = true; S.msg = 'chBusy'; renderStatic();
+  try {
+    const r = await fetch(API + '/api/channel', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({url: u})}), j = await r.json().catch(() => ({}));
+    if (!r.ok || !Array.isArray(j.videos)) throw {code: j.error || 'server_error'};
+    S.ch = j; S.msg = ''; document.getElementById('url').value = ''; render(); document.getElementById('channel').scrollIntoView();
+  } catch (e) { const k = 'e_' + (e && e.code ? e.code : 'network'); S.msg = T[k] ? k : 'e_server_error'; renderStatic(); }
+  finally { S.busy = false; btn.disabled = false; }
+}
+function download(name, rows) {
+  const csv = '\ufeff' + rows.map(r => r.map(x => '"' + String(x == null ? '' : x).replace(/"/g, '""') + '"').join(',')).join('\r\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'})); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+}
+function exportTable() {
+  download('hype-hud-summary.csv', [T.heads.concat(['URL'])].concat(sorted().map(({v, m}) => [v.channel, v.views, isNaN(vsCh(v)) ? '' : vsCh(v).toFixed(2), pct(m.likeRate, 2),
+    pct(m.relevance), pct(m.intent), pct(m.hesitant), m.bars[0] ? T.b[m.bars[0].key] : T.none, pct(m.competitor), pct(m.adDislike), S.fees[v.id] || '', isNaN(cpm(v)) ? '' : cpm(v).toFixed(2), 'https://www.youtube.com/watch?v=' + v.id])));
+}
+function exportComments() {
+  const lab = (o, k) => (k && k !== 'none' && k !== 'unknown') ? (o[k] || k) : '';
+  download('hype-hud-comments-' + S.vid + '.csv', [T.cHeads].concat(currentList().map(c => [c.t, c.k, T.a[c.a] || c.a, lab(T.b, c.b1), lab(T.b, c.b2), lab(T.l, c.l), c.c, lab(T.ad, c.ad), c.cv ? 1 : 0, c.cf, c.ev])));
+}
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function big(n) { return n == null ? 'n/a' : n >= 1e6 ? (n/1e6).toFixed(n >= 1e7 ? 0 : 1) + 'M' : n >= 1e3 ? (n/1e3).toFixed(n >= 1e5 ? 0 : 1) + 'K' : String(n); }
+const pct = (x, d) => (x == null || isNaN(x)) ? 'n/a' : (x*100).toFixed(d == null ? 0 : d) + '%';
+const videoId = u => { for (const p of [/[?&]v=([\w-]{11})/, /youtu\.be\/([\w-]{11})/, /\/shorts\/([\w-]{11})/, /\/live\/([\w-]{11})/]) { const m = u.match(p); if (m) return m[1]; } return null; };
+
+function match(c, f) {
+  if (!f) return true;
+  if (f.k === 'a') return c.a === f.v;
+  if (f.k === 'related') return c.a !== 'offtopic';
+  if (f.k === 'b') return c.b1 === f.v || c.b2 === f.v;
+  if (f.k === 'l') return c.l === f.v;
+  if (f.k === 'c') return c.c === f.v;
+  if (f.k === 'ad') return f.v === 'any' ? c.ad !== 'none' : c.ad === f.v;
+  if (f.k === 'cv') return c.cv === 1;
+  if (f.k === 'cf') return c.cf === 'low';
+  if (f.k === 'dupc') return c._d === 1;
+  if (f.k === 'low') return c._l === 1;
+  if (f.k === 'lb') { const [l, b] = f.v.split('|'); return c.l === l && (c.b1 === b || c.b2 === b); }
+  return true;
+}
+function filterName(f) {
+  if (f.k === 'a') return T.a[f.v];
+  if (f.k === 'related') return T.fRel;
+  if (f.k === 'b') return T.fBar + T.b[f.v];
+  if (f.k === 'l') return T.l[f.v];
+  if (f.k === 'c') return T.fMention + f.v;
+  if (f.k === 'ad') return f.v === 'any' ? T.fAd : T.ad[f.v];
+  if (f.k === 'cv') return T.cv;
+  if (f.k === 'cf') return T.low;
+  if (f.k === 'dupc') return T.fDup;
+  if (f.k === 'low') return T.fLow;
+  if (f.k === 'lb') { const [l, b] = f.v.split('|'); return T.fLb(T.l[l], T.b[b]); }
+  return '';
+}
+function metrics(v, weighted) {
+  const w = c => weighted ? 1 + c.k : 1;
+  const W = f => v.comments.reduce((s, c) => s + (f(c) ? w(c) : 0), 0);
+  const N = f => v.comments.filter(f).length;
+  const all = W(() => true), rel = W(c => c.a !== 'offtopic');
+  const att = {}; ORDER.forEach(a => att[a] = {w: W(c => c.a === a), n: N(c => c.a === a)});
+  const bars = BKEYS.map(b => ({key:b, w: W(c => c.b1 === b || c.b2 === b), n: N(c => c.b1 === b || c.b2 === b)})).filter(x => x.n).sort((x, y) => y.w - x.w);
+  const layers = LKEYS.map(l => ({key:l, w: W(c => c.l === l), n: N(c => c.l === l)}));
+  const comp = {}, own = (v.title + ' ' + D.videos.map(x => x.channel).join(' ')).toLowerCase(); v.comments.forEach(c => { if (c.c && c.c.length > 2 && !own.includes(c.c.toLowerCase())) comp[c.c] = (comp[c.c] || 0) + 1; });   // 去掉同系列作品和创作者名字
+  return {
+    n: v.comments.length, nRel: N(c => c.a !== 'offtopic'), all, rel, att, bars, layers,
+    comps: Object.entries(comp).sort((x, y) => y[1] - x[1]),
+    relevance: all ? rel / all : NaN, intent: rel ? att.want.w / rel : NaN, hesitant: rel ? att.hesitant.w / rel : NaN,
+    competitor: all ? W(c => c.l === 'competitor') / all : NaN, nComp: N(c => c.l === 'competitor'),
+    adDislike: all ? W(c => c.ad === 'dislike') / all : NaN, nAd: N(c => c.ad !== 'none'), nDislike: N(c => c.ad === 'dislike'),
+    nCv: N(c => c.cv === 1), nLow: N(c => c.cf === 'low'),
+    likeRate: v.views ? v.likes / v.views : NaN, commentRate: v.views ? v.commentCount / v.views : NaN, viewsPerSub: v.subs ? v.views / v.subs : NaN
+  };
+}
+
+function renderStatic() {
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  document.querySelectorAll('[data-i]').forEach(el => { el.textContent = T[el.dataset.i]; });
+  document.querySelectorAll('[data-lang]').forEach(b => b.classList.toggle('on', b.dataset.lang === lang));
+  document.getElementById('url').placeholder = T.ph;
+  document.getElementById('heads').innerHTML = T.heads.map((h, i) => `<th data-sort="${i}" title="${esc(T.headTips[i])}">${h}${S.sort.k === i ? (S.sort.dir < 0 ? ' ↓' : ' ↑') : ''}</th>`).join('');
+  document.getElementById('msg').textContent = !S.msg ? '' : typeof S.msg === 'string' ? T[S.msg] : (typeof T[S.msg.k] === 'function' ? T[S.msg.k](...S.msg.a) : T[S.msg.k]);
+  document.getElementById('pw').placeholder = T.pwPh;
+  document.getElementById('quota').textContent = S.quota ? T.quota(Math.max(0, S.quota.limit - S.quota.spent).toFixed(2), S.quota.limit) : '';
+  document.getElementById('samples').innerHTML = D.videos.map(v => `<button class="chip" data-sample="${v.id}">${esc(v.channel)}</button>`).join('');
+  document.getElementById('notice').innerHTML = !D.videos.length ? `<div class="notice">${T.nodata}</div>` : D.partial ? `<div class="notice">${T.partial}</div>` : '';
+  document.getElementById('methodList').innerHTML = T.method(esc(D.model || 'Claude')).map(x => '<li>' + x + '</li>').join('');
+  document.getElementById('methodGo').innerHTML = `<span>${BENCH[lang].more}</span>` + ['read', 'fake', 'risk'].map(k => `<button class="ghost" data-goto="${k}">${BENCH[lang].go[k]}</button>`).join('');
+  document.getElementById('foot').textContent = T.foot(D.videos.length, D.videos.reduce((s, v) => s + v.comments.length, 0), D.generated || '');
+}
+function renderCompare() {
+  document.getElementById('rows').innerHTML = sorted().map(({v, m}) => {
+    const fk = fakeCheck(v, m);
+    return `<tr data-vid="${v.id}" class="${v.id === S.vid ? 'on' : ''}">
+      <td><i class="fd ${fk.lv}" title="${T.fk[fk.lv]}"></i><b>${esc(v.channel)}</b>${v.live ? `<button class="rm" data-rm="${v.id}" title="${T.remove}">×</button>` : ''}<div class="t">${esc(v.title)}</div></td>
+      <td>${big(v.views)}</td><td>${isNaN(vsCh(v)) ? (CHM[v.id] === undefined && API ? '…' : 'n/a') : vsCh(v).toFixed(2) + 'x'}</td><td>${pct(m.likeRate, 1)}</td>
+      <td>${pct(m.relevance)}</td><td>${pct(m.intent)}</td><td>${pct(m.hesitant)}</td>
+      <td>${m.bars[0] ? esc(T.b[m.bars[0].key]) : T.none}</td><td>${pct(m.competitor)}</td><td>${pct(m.adDislike)}</td>
+      <td><input type="text" class="fee" data-fee="${v.id}" value="${esc(S.fees[v.id] || '')}" placeholder="${T.feePh}" inputmode="decimal"></td><td>${isNaN(cpm(v)) ? 'n/a' : '$' + cpm(v).toFixed(2)}</td></tr>`;
+  }).join('');
+  let port = document.getElementById('port'); if (!port) { port = document.createElement('div'); port.id = 'port'; port.className = 'port'; document.querySelector('#compare .hrow').after(port); }
+  const all = sorted(), tv = all.reduce((a, x) => a + (x.v.views || 0), 0), fv = all.filter(x => !isNaN(fee(x.v))), tf = fv.reduce((a, x) => a + fee(x.v), 0), fviews = fv.reduce((a, x) => a + (x.v.views || 0), 0);
+  port.innerHTML = all.length ? T.port(all.length, big(tv), pct(median(all.map(x => x.m.intent))), fv.length && fviews ? (tf / fviews * 1000).toFixed(2) : '') : '';
+  let dl = document.getElementById('dotlg'); if (!dl) { dl = document.createElement('div'); dl.id = 'dotlg'; dl.className = 'note'; document.querySelector('#compare .scroll').after(dl); }
+  dl.innerHTML = API ? `<i class="fd ok"></i><i class="fd watch"></i><i class="fd flag"></i>${T.dotLg}` : '';
+  let fit = document.getElementById('fit'); if (!fit) { fit = document.createElement('div'); fit.id = 'fit'; document.getElementById('compare').appendChild(fit); }
+  fit.innerHTML = fitMap();
+}
+function highlight(text, ev) {
+  const t = esc(text); if (!ev) return t;
+  const e = esc(ev), i = t.toLowerCase().indexOf(e.toLowerCase());
+  return i < 0 ? t : t.slice(0, i) + '<mark>' + t.slice(i, i + e.length) + '</mark>' + t.slice(i + e.length);
+}
+function tile(k, v, d, f, txt, tip) {
+  const inner = `<div class="k">${k}</div><div class="v${txt ? ' txt' : ''}">${v}</div><div class="d">${d}</div>`;
+  return f ? `<button class="tile" data-f="${f}" title="${esc(tip || '')}">${inner}</button>` : `<div class="tile" title="${esc(tip || '')}">${inner}</div>`;
+}
+function renderDetail() {
+  const v = D.videos.find(x => x.id === S.vid), el = document.getElementById('detail');
+  if (!v) { el.innerHTML = ''; return; }
+  const m = metrics(v, S.weighted), top = m.bars[0];
+  let F = ''; const P = {overview:'', audience:'', creator:'', comments:''}; if (!P.hasOwnProperty(S.tab)) S.tab = 'overview';
+  let h = `<div class="card key"><div class="vhead"><div>
+      <h3>${esc(v.channel)}${v.paid ? `<span class="badge">${T.paid}</span>` : ''}${(J0 => J0 && J0 !== 'loading' && J0.verdict.includes('v6'))(judged(v, m)) ? `<span class="badge warn">${T.small}</span>` : ''}</h3>
+      <div class="meta"><a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">${esc(v.title)}</a></div>
+      <div class="meta">${T.meta(v, m)}</div>
+    </div>
+    <div class="acts"><label class="toggle"><input type="checkbox" id="wt" ${S.weighted ? 'checked' : ''}> ${T.weight}</label><button class="ghost" id="share">${T.copyLink}</button>${benchBtn('read')}</div></div>
+    ${benchHTML('read')}<div class="verdict"><span>${T.vLabel}</span>${esc(verdict(v, m))}</div>
+    <div class="ai"><b>AI</b><span>${T.ai(esc(v.model || D.model || 'Claude'))}</span></div>
+    <div class="tiles">
+      ${tile(T.kRel, pct(m.relevance), T.ofAll(m.nRel, m.n) + vsMedian('relevance', m.relevance), 'related:1', false, T.tip.rel)}
+      ${tile(T.kWant, pct(m.intent), T.ofRel(m.att.want.n, m.nRel) + vsMedian('intent', m.intent), 'a:want', false, T.tip.want)}
+      ${tile(T.kHes, pct(m.hesitant), T.ofRel(m.att.hesitant.n, m.nRel), 'a:hesitant', false, T.tip.hes)}
+      ${tile(T.kBar, top ? esc(T.b[top.key]) : T.noBar, top ? T.nComments(top.n) : T.noBarD, top ? 'b:' + top.key : '', true, T.tip.bar)}
+      ${tile(T.kComp, pct(m.competitor), T.ofAll(m.nComp, m.n), 'l:competitor', false, T.tip.comp)}
+      ${tile(T.kAd, pct(m.adDislike), T.adD(m.nDislike, m.nAd), 'ad:any', false, T.tip.ad)}
+    </div></div>`;
+  const nb = brief(v, m);
+  if (nb.length) P.overview += `<div class="card key"><h2>${T.nextTitle}</h2><ul class="nb">${nb.map(x => '<li>' + esc(x) + '</li>').join('')}</ul><div class="note">${T.nextNote}</div></div>`;
+  const qs = ['want', 'hesitant', 'critical'].map(a => v.comments.filter(c => c.a === a && c.t.length >= 25).sort((x, y) => y.k - x.k)[0]).filter(Boolean);
+  if (qs.length) P.overview += `<div class="card"><h2>${T.qTitle}</h2><div class="qs">` + qs.map(c => `<div class="q"><p>${highlight(c.t, c.ev)}</p>${lang === 'zh' && c._zh ? `<p class="zh">${esc(c._zh)}</p>` : ''}<div class="tags"><span class="tag ${c.a}">${T.a[c.a]}</span><span>${c.k.toLocaleString()} ${T.likes}</span><button class="cp" data-cp="${esc(c.t)}">${T.copyQuote}</button></div></div>`).join('') + `</div><div class="note">${T.qNote}</div></div>`;
+  P.audience += `<div class="grid"><div class="card"><h2>${T.stance}</h2><div class="stack">` +
+    ORDER.map(a => m.att[a].w ? `<button data-f="a:${a}" title="${T.a[a]}" style="width:${m.att[a].w / m.all * 100}%;background:${COLOR[a]}"></button>` : '').join('') +
+    `</div><div class="legend">` +
+    ORDER.map(a => `<button class="lg" data-f="a:${a}"><span class="dot" style="background:${COLOR[a]}"></span>${T.a[a]}<span class="n">${m.att[a].n} · ${pct(m.att[a].w / m.all)}</span></button>`).join('') +
+    `</div></div>`;
+  const maxB = m.bars[0] ? m.bars[0].w : 1;
+  P.audience += `<div class="card"><h2>${T.holding}</h2>` +
+    (m.bars.length ? m.bars.map(b => `<button class="bar" data-f="b:${b.key}"><span>${T.b[b.key]}</span><span><i style="width:${Math.max(4, b.w / maxB * 100)}%"></i></span><span class="n">${b.n}</span></button>`).join('')
+      : `<div class="empty">${T.noReason}</div>`) + `</div></div>`;
+  if (m.bars.length) {
+    const cols = m.bars.slice(0, 7).map(b => b.key), cell = (l, b) => v.comments.filter(c => c.l === l && (c.b1 === b || c.b2 === b)).length, big2 = Math.max(1, ...LKEYS.map(l => Math.max(...cols.map(b => cell(l, b)))));
+    P.audience += `<div class="card"><h2>${T.mxTitle}</h2><div class="scroll"><table class="mx"><thead><tr><th></th>${cols.map(b => '<th>' + T.b[b] + '</th>').join('')}</tr></thead><tbody>` +
+      LKEYS.map(l => `<tr><td>${T.l[l]}</td>` + cols.map(b => { const n = cell(l, b); return '<td>' + (n ? `<button data-f="lb:${l}|${b}" style="background:rgba(106,87,201,${(.12 + .78 * n / big2).toFixed(2)});color:${n / big2 > .45 ? '#fff' : '#1b1530'}">${n}</button>` : '<span class="z">0</span>') + '</td>'; }).join('') + '</tr>').join('') +
+      `</tbody></table></div><div class="note">${T.mxNote}</div></div>`;
+  }
+  const known = m.layers.filter(x => x.key !== 'unknown'), maxL = Math.max(1, ...known.map(x => x.w));
+  P.audience += `<div class="card"><h2>${T.who}</h2>` +
+    known.map(x => `<button class="bar" data-f="l:${x.key}"><span>${T.l[x.key]}</span><span><i style="width:${x.n ? Math.max(4, x.w / maxL * 100) : 0}%"></i></span><span class="n">${x.n}</span></button>`).join('') +
+    `<div class="meta" style="margin-top:8px">${T.noClue(m.layers.find(x => x.key === 'unknown').n, m.n)}</div>` +
+    (m.comps.length ? `<div class="chips">` + m.comps.slice(0, 8).map(([name, n]) => `<button class="chip" data-f="c:${esc(name)}">${esc(name)} · ${n}</button>`).join('') + `</div>` : '') + `</div>`;
+  const fk = fakeCheck(v, m); if (CHFULL[v.id] === undefined) ensureChannel(v);
+  F += `<div class="card key"><div class="hrow"><h2>${T.fkTitle}</h2>${fk.rows.length ? benchBtn('fake') : ''}</div>${fkHead(fk)}${fk.rows.length ? benchHTML('fake') + fkRows(fk.rows) + `<div class="note">${T.chNote} ${T.chNoAi}</div>` : ''}</div>`;
+  const chF = CHFULL[v.id];
+  if (chF && chF !== 'loading') {
+    const B = baseline(chF), st = B.st, bs = B.base, r0 = v.views / bs.med, W = B.use ? T.wPeriod : T.wUsual, J = judged(v, m), ck = i => J && J !== 'loading' && J.cmp ? J.cmp[i] : null,
+      say = (r, k) => isNaN(r) || !isFinite(r) || k === 'na' ? ['info', 'n/a', ''] : !k ? ['info', pct(r), ''] : k === 'low' ? ['watch', T.cmpLow(pct(r), W[1]), T.cmpTag.low(W[2])] : k === 'high' ? ['ok', T.cmpHigh(r, W[1], pct(r)), T.cmpTag.high(W[2])] : ['info', T.cmpSame(pct(r), W[1]), T.cmpTag.same()];
+    const rows = [[T.cmpViews, big(v.views), big(Math.round(bs.med)), big(Math.round(st.med)), r0], [T.cmpLike, pct(m.likeRate, 2), pct(bs.medLike, 2), pct(st.medLike, 2), m.likeRate / bs.medLike], [T.cmpCom, pct(m.commentRate, 3), pct(bs.medCom, 3), pct(st.medCom, 3), m.commentRate / bs.medCom]];
+    const k0 = ck(0), lead = isNaN(r0) || !k0 || k0 === 'na' ? '' : T.cmpLead(k0, k0 === 'high' ? r0.toFixed(1) : pct(r0), W[0]) + (J.cmpOut ? ' ' + T.cmpOut : ''), dates = bs.L.map(x => x.published.slice(0, 10)).sort();
+    F += `<div class="card key2"><h2>${T.crTitle}</h2><p class="lead">${lead}</p>
+      <div class="scroll"><table class="cmp"><thead><tr>${(B.use ? T.cmpHP : T.cmpH).map(x => '<th>' + x + '</th>').join('')}</tr></thead><tbody>` +
+      rows.map(([name, a, b, c, r], i) => { const [lv, text, tag] = say(r, ck(i)); return `<tr><td>${name}</td><td class="num">${a}</td><td class="usual">${b}</td>${B.use ? `<td class="usual">${c}</td>` : ''}<td>${text}${tag ? `<em class="lt ${lv}">${tag}</em>` : ''}</td></tr>`; }).join('') +
+      `</tbody></table></div><div class="note">${T.cmpRule}</div>` + (B.use ? `<div class="note" style="margin-top:6px">${T.cmpBaseP(bs.L.length, dates[0], dates[dates.length - 1])}</div><div class="note" style="margin-top:6px">${T.cmpNow(st.L.length)}</div>`
+        : `<div class="note" style="margin-top:6px">${T.cmpBase(st.L.length)}</div>${chF.videos.some(x => x.id === v.id) ? '' : `<div class="note" style="margin-top:6px">${T.vchOld(v.published)}</div>`}`) + `</div>`;
+  }
+  P.creator += `<div class="card"><div class="hrow"><h2>${T.rTitle}</h2>${benchBtn('risk')}</div>${benchHTML('risk')}${lvLegend()}<div class="rk">` +
+    risk(v, m).map(x => { const inner = `<div><b>${x.label}${lvTag(x.lv)}</b><span>${x.value}</span></div>`; return x.f ? `<button class="rr" data-f="${x.f}">${inner}</button>` : `<div class="rr">${inner}</div>`; }).join('') +
+    `</div><div class="note">${T.rNote} <a href="https://www.google.com/search?tbm=nws&q=${encodeURIComponent('"' + v.channel + '"')}" target="_blank" rel="noopener">${esc(T.rNews(v.channel))}</a></div></div>`;
+  const full = CHFULL[v.id];
+  if (full && full !== 'loading') P.creator += channelHTML(full, false);
+  const list = currentList();
+  P.comments += `<div class="card" id="comments"><div class="hrow"><h2>${T.behind}</h2><button class="ghost" id="csv2">${T.exportComments}</button></div>
+    <div class="row"><input type="text" id="q" placeholder="${T.search}" value="${esc(S.q)}">${lang === 'zh' && window.CS_TRANSLATE && API ? `<button class="ghost" id="tr" ${S.trBusy ? 'disabled' : ''}>${S.trBusy ? T.trBusy : T.trBtn}</button>` : ''}</div>${S.trErr ? `<div class="note">${T.trFail}</div>` : ''}
+    <div class="chips"><button class="chip ${S.filter ? '' : 'on'}" data-f="">${T.all} · ${v.comments.length}</button>` +
+    (S.filter ? `<button class="chip on" data-f="">${esc(filterName(S.filter))} · ${list.length} ✕</button>` : '') + `</div>` +
+    (list.length ? list.slice(0, S.limit).map(c => `<div class="cm"><p>${highlight(c.t, c.ev)}</p>${lang === 'zh' && c._zh ? `<p class="zh">${esc(c._zh)}</p>` : ''}<div class="tags">
+        <span class="tag ${c.a}">${T.a[c.a] || esc(c.a)}</span>` +
+        [c.b1, c.b2].filter(b => b && b !== 'none').map(b => `<span class="tag">${T.b[b] || esc(b)}</span>`).join('') +
+        (c.l && c.l !== 'unknown' ? `<span class="tag">${T.l[c.l] || esc(c.l)}${c.c ? ': ' + esc(c.c) : ''}</span>` : '') +
+        (c.ad && c.ad !== 'none' ? `<span class="tag">${T.ad[c.ad] || esc(c.ad)}</span>` : '') +
+        (c.cv ? `<span class="tag critical">${T.cvTag}</span>` : '') +
+        (c.cf === 'low' ? `<span class="tag">${T.lowTag}</span>` : '') +
+        `<span>${c.k.toLocaleString()} ${T.likes}</span><button class="cp" data-cp="${esc(c.t)}">${T.copyQuote}</button></div></div>`).join('') : `<div class="empty" style="padding:16px 0">${T.noMatch}</div>`) +
+    (list.length > S.limit ? `<button class="more" id="more">${T.more(list.length - S.limit)}</button>` : '') + `</div>`;
+  const tabs = [['overview', T.tOverview], ['audience', T.tAudience], ['creator', T.tCreator], ['comments', T.tComments + ' · ' + v.comments.length]];
+  el.innerHTML = h + `<div id="fake">${F}</div><div class="tabbar"><div class="tabs">${tabs.map(([k, n]) => `<button data-tab="${k}" class="${S.tab === k ? 'on' : ''}">${n}</button>`).join('')}</div></div>` + P[S.tab];
+  document.querySelectorAll('.top nav a[data-tab]').forEach(a => a.classList.toggle('on', a.dataset.tab === S.tab));
+}
+function render(keepFocus) {
+  renderStatic(); renderCompare(); renderDetail(); renderBatch(); renderChannel(); loadMedians();
+  if (keepFocus) { const q = document.getElementById('q'); if (q) { q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
+}
+function select(id, scroll) { S.vid = id; S.filter = null; S.q = ''; S.limit = 30; S.tab = 'overview'; render(); if (scroll) document.getElementById('detail').scrollIntoView(); }
+
+document.addEventListener('click', e => {
+  if (e.target.closest('input.fee')) return;
+  const tb = e.target.closest('[data-tab]');
+  if (tb) { e.preventDefault(); S.tab = tb.dataset.tab; renderDetail(); if (tb.tagName === 'A') document.getElementById('detail').scrollIntoView(); else { const t = document.querySelector('.tabbar'); if (t && t.getBoundingClientRect().top <= 60) t.scrollIntoView(); } return; }
+  if (e.target.id === 'chk') return channelCheck('https://www.youtube.com/watch?v=' + S.vid);
+  if (e.target.id === 'chclose') { S.ch = null; return renderChannel(); }
+  const gb = e.target.closest('[data-goto]'); if (gb) { const k = gb.dataset.goto; S.bench = S.bench || {}; S.bench[k] = true; if (k === 'risk') S.tab = 'creator'; renderDetail();
+    const el = k === 'fake' ? document.getElementById('fake') : k === 'risk' ? document.querySelector('[data-bench="risk"]').closest('.card') : document.getElementById('detail'); if (el) el.scrollIntoView(); return; }
+  const bb = e.target.closest('[data-bench]'); if (bb) { S.bench = S.bench || {}; S.bench[bb.dataset.bench] = !S.bench[bb.dataset.bench]; renderChannel(); return renderDetail(); }
+  const anb = e.target.closest('[data-an]'); if (anb) { document.getElementById('url').value = 'https://www.youtube.com/watch?v=' + anb.dataset.an; return analyse(); }
+  if (e.target.id === 'tr') return translateShown();
+  if (e.target.id === 'share') return copyText(shareUrl(), e.target);
+  const cpb = e.target.closest('[data-cp]'); if (cpb) { const v = D.videos.find(x => x.id === S.vid); return copyText('"' + cpb.dataset.cp + '" (comment on ' + (v ? v.channel + ', ' : '') + 'youtu.be/' + S.vid + ')', cpb); }
+  const rmb = e.target.closest('[data-rm]'); if (rmb) { D.videos = D.videos.filter(x => x.id !== rmb.dataset.rm); saveAdded(); if (S.vid === rmb.dataset.rm) S.vid = D.videos[0] && D.videos[0].id; return render(); }
+  const bub = e.target.closest('[data-vid2]'); if (bub) return select(bub.dataset.vid2, true);
+  if (e.target.id === 'bstart') return runBatch();
+  if (e.target.id === 'bstop') { B.stop = true; return renderBatch(); }
+  if (e.target.id === 'bexport') return exportSheet();
+  if (e.target.id === 'bclose') { if (!B.running) { B.aoa = null; renderBatch(); } return; }
+  if (e.target.id === 'csv1') return exportTable();
+  if (e.target.id === 'csv2') return exportComments();
+  const th = e.target.closest('th[data-sort]');
+  if (th) { const k = +th.dataset.sort; S.sort = S.sort.k === k ? {k, dir: -S.sort.dir} : {k, dir: k === 0 ? 1 : -1}; return render(); }
+  const lb = e.target.closest('[data-lang]');
+  if (lb) { lang = lb.dataset.lang; T = I[lang]; try { localStorage.setItem('cs-lang', lang); } catch (err) {} return render(); }
+  const row = e.target.closest('tr[data-vid]'); if (row) return select(row.dataset.vid, true);
+  const s = e.target.closest('[data-sample]'); if (s) return select(s.dataset.sample, true);
+  if (e.target.id === 'more') { S.limit += 50; return render(); }
+  const f = e.target.closest('[data-f]');
+  if (f) {
+    const raw = f.dataset.f, i = raw.indexOf(':');
+    S.filter = raw ? {k: raw.slice(0, i), v: raw.slice(i + 1)} : null; S.limit = 30; S.tab = 'comments'; render();
+    document.querySelector('.tabbar').scrollIntoView();
+  }
+});
+document.addEventListener('change', e => {
+  if (e.target.id === 'wt') { S.weighted = e.target.checked; render(); }
+  if (e.target.id === 'bname') { B.cols.name = +e.target.value; renderBatch(); }
+  if (e.target.id === 'bfee') { B.cols.fee = +e.target.value; B.items.forEach(applyFee); renderCompare(); renderBatch(); }
+  if (e.target.classList.contains('fee')) { S.fees[e.target.dataset.fee] = e.target.value.replace(/[^0-9.]/g, ''); try { localStorage.setItem('cs-fees', JSON.stringify(S.fees)); } catch (err) {} renderCompare(); }
+});
+document.addEventListener('input', e => { if (e.target.id === 'q') { S.q = e.target.value; S.limit = 30; render(true); } });
+function analyse() {
+  const u = document.getElementById('url').value.trim(), many = findLinks(u);
+  if (many.length > 1) { document.getElementById('url').value = ''; return loadSheet(lang === 'zh' ? '粘贴的链接' : 'pasted links', many.map(x => [x]), null); }
+  if (u && (/^@[\w.\-]+$/.test(u) || classify(u).kind === 'channel')) return channelCheck(u);
+  const id = u && videoId(u);
+  if (!u) S.msg = 'mEmpty'; else if (!id) S.msg = 'mBad';
+  else if (D.videos.some(v => v.id === id)) { S.msg = ''; return select(id, true); }
+  else if (!API) S.msg = 'mLive';
+  else return live(u);
+  renderStatic();
+}
+function savePw() {
+  const v = document.getElementById('pw').value; if (!v) return;
+  PW = v; try { sessionStorage.setItem('cs-pw', PW); } catch (e) {}
+  document.getElementById('pw').value = ''; document.getElementById('pwrow').hidden = true; analyse();
+}
+async function analyseOne(u, onProg) {
+  const r = await fetch(API + '/api/analyze', {method:'POST', headers: PW ? {'content-type':'application/json', Authorization:'Bearer ' + PW} : {'content-type':'application/json'}, body: JSON.stringify({url: u})});
+  if (!r.ok) {
+    const j = await r.json().catch(() => ({}));
+    if (r.status === 401) { const had = !!PW; PW = ''; try { sessionStorage.removeItem('cs-pw'); } catch (e) {} document.getElementById('pwrow').hidden = false; throw {code: had ? 'bad_password' : 'need_password'}; }
+    throw {code: j.error || 'server_error'};
+  }
+  const reader = r.body.getReader(), dec = new TextDecoder(); let buf = '', video = null;
+  for (;;) {
+    const {value, done} = await reader.read(); if (done) break;
+    buf += dec.decode(value, {stream: true}); let i;
+    while ((i = buf.indexOf('\n')) >= 0) {
+      const line = buf.slice(0, i).trim(); buf = buf.slice(i + 1); if (!line) continue;
+      const ev = JSON.parse(line);
+      if (ev.type === 'progress') { if (onProg) onProg(ev); }
+      else if (ev.type === 'error') throw {code: ev.code};
+      else if (ev.type === 'done') { video = ev.video; if (ev.quota) S.quota = ev.quota; }
+    }
+  }
+  if (!video || !Array.isArray(video.comments)) throw {code: 'server_error'};
+  video.live = true; D.videos = D.videos.filter(x => x.id !== video.id); D.videos.push(video); saveAdded();
+  return video;
+}
+async function live(u) {
+  if (S.busy) return;
+  const btn = document.getElementById('go'); S.busy = true; btn.disabled = true;
+  S.msg = {k:'pFetch', a:[]}; renderStatic();
+  try {
+    const video = await analyseOne(u, ev => { S.msg = ev.stage === 'fetch' ? {k:'pFetch', a:[]} : {k:'pRead', a:[ev.done, ev.total]}; renderStatic(); });
+    S.msg = video.failed ? {k:'pPartial', a:[video.failed]} : ''; document.getElementById('url').value = ''; select(video.id, true);
+  } catch (e) {
+    const k = 'e_' + (e && e.code ? e.code : 'network'); S.msg = T[k] ? k : 'e_server_error'; renderStatic();
+  } finally { S.busy = false; btn.disabled = false; }
+}
+
+/* ---------- 批量导入：表格在浏览器里解析，只有视频链接会发给后端 ---------- */
+const B = {name:'', aoa:null, header:-1, cols:{name:-1, fee:-1}, items:[], ignored:0, running:false, stop:false};
+const LINK_RE = /(?:https?:\/\/|www\.)[^\s"'<>]+|(?:youtube\.com|youtu\.be)\/[^\s"'<>]+/gi;
+const findLinks = s => (String(s == null ? '' : s).match(LINK_RE) || []).map(x => x.replace(/[),.;，。；、）】\]]+$/, ''));
+function classify(u) {
+  if (/youtube\.com|youtu\.be/i.test(u)) { const id = videoId(u); if (id) return {kind:'video', id}; return {kind: /\/(@|channel\/|c\/|user\/)/.test(u) ? 'channel' : 'ytother'}; }
+  if (/tiktok\.|twitch\.tv|instagram\.|bilibili\.|twitter\.com|\/\/(www\.)?x\.com|facebook\.|douyin\.|xiaohongshu\.|kick\.com/i.test(u)) return {kind:'platform'};
+  return {kind:'ignore'};
+}
+const colLetter = c => { let s = ''; for (c++; c > 0; c = Math.floor((c - 1) / 26)) s = String.fromCharCode(65 + (c - 1) % 26) + s; return s; };
+const parseFee = x => { const s = String(x == null ? '' : x).replace(/,/g, ''), m = s.match(/(\d+(?:\.\d+)?)\s*(k)?/i); return m ? parseFloat(m[1]) * (m[2] ? 1000 : 1) : NaN; };
+function loadSheet(name, aoa, links) {
+  B.name = name; B.aoa = aoa; B.items = []; B.ignored = 0; B.running = false; B.stop = false;
+  const seen = {};
+  aoa.forEach((row, r) => row.forEach((cell, c) => {
+    const urls = findLinks(cell); if (links && links[r + ',' + c]) urls.push(links[r + ',' + c]);
+    const inCell = new Set();
+    urls.forEach(u => {
+      const k = classify(u), key = k.id || u; if (inCell.has(key)) return; inCell.add(key);
+      if (k.kind === 'ignore') { B.ignored++; return; }
+      const it = {row: r, url: u, kind: k.kind, id: k.id || null, status: k.kind};
+      if (k.kind === 'video') { it.status = seen[k.id] ? 'dup' : D.videos.some(v => v.id === k.id) ? 'have' : 'ready'; seen[k.id] = 1; }
+      B.items.push(it);
+    });
+  }));
+  const first = B.items.length ? Math.min(...B.items.map(i => i.row)) : 0;
+  B.header = -1; for (let r = first - 1; r >= 0; r--) if (aoa[r].some(x => String(x).trim())) { B.header = r; break; }
+  const heads = B.header >= 0 ? aoa[B.header].map(x => String(x)) : [];
+  const guess = re => heads.findIndex(h => re.test(h));
+  B.cols = {name: guess(/name|creator|channel|influencer|kol|博主|达人|名字|名称|创作者|频道|昵称/i), fee: guess(/fee|price|cost|rate|quote|budget|报价|价格|费用|预算/i)};
+  B.items.forEach(applyFee);
+  if (!B.items.some(i => i.kind === 'video')) { B.aoa = null; S.msg = 'bNone'; }
+  else S.msg = '';
+  render(); if (B.aoa) document.getElementById('batch').scrollIntoView();
+}
+function applyFee(it) {
+  if (!it.id || B.cols.fee < 0 || !B.aoa) return;
+  const f = parseFee(B.aoa[it.row][B.cols.fee]); if (isNaN(f) || !D.videos.some(v => v.id === it.id)) return;
+  S.fees[it.id] = String(f); try { localStorage.setItem('cs-fees', JSON.stringify(S.fees)); } catch (e) {}
+}
+function loadXLSX() {
+  return window.XLSX ? Promise.resolve() : new Promise((ok, bad) => { const s = document.createElement('script'); s.src = 'vendor/xlsx.full.min.js'; s.onload = ok; s.onerror = bad; document.head.appendChild(s); });
+}
+async function readFile(f) {
+  S.msg = 'bReading'; renderStatic();
+  try {
+    await loadXLSX();
+    const isText = /\.(csv|tsv|txt)$/i.test(f.name);
+    const wb = isText ? XLSX.read(await f.text(), {type:'string', raw:true}) : XLSX.read(await f.arrayBuffer(), {type:'array'});
+    let best = null;
+    for (const n of wb.SheetNames) {
+      const ws = wb.Sheets[n]; if (!ws || !ws['!ref']) continue;
+      const rg = XLSX.utils.decode_range(ws['!ref']), aoa = [], links = {}; let hits = 0;
+      for (let R = rg.s.r; R <= Math.min(rg.e.r, rg.s.r + 5000); R++) {
+        const row = [];
+        for (let C = rg.s.c; C <= rg.e.c; C++) {
+          const cell = ws[XLSX.utils.encode_cell({r: R, c: C})], text = cell ? (cell.w != null ? cell.w : cell.v != null ? String(cell.v) : '') : '';
+          row.push(text);
+          if (cell && cell.l && cell.l.Target) { links[(R - rg.s.r) + ',' + (C - rg.s.c)] = cell.l.Target; hits++; }
+          if (findLinks(text).length) hits++;
+        }
+        aoa.push(row);
+      }
+      if (!best || hits > best.hits) best = {aoa, links, hits};
+    }
+    if (!best) throw new Error('empty');
+    loadSheet(f.name.replace(/\.[^.]+$/, ''), best.aoa, best.links);
+  } catch (e) { S.msg = 'bBad'; renderStatic(); }
+}
+function renderBatch() {
+  const el = document.getElementById('batch'); if (!B.aoa) { el.innerHTML = ''; return; }
+  const n = st => B.items.filter(i => st.includes(i.status)).length;
+  const ready = n(['ready']), failed = n(['error']), have = n(['have']), done = n(['done']), skip = n(['dup', 'channel', 'platform', 'ytother']), total = B.items.filter(i => i.kind === 'video' && i.status !== 'dup' && i.status !== 'have').length;
+  const width = Math.max(...B.aoa.map(r => r.length)), label = c => B.header >= 0 && String(B.aoa[B.header][c] || '').trim() ? esc(String(B.aoa[B.header][c]).slice(0, 30)) : T.bCol(colLetter(c));
+  const opts = sel => `<option value="-1">${T.bNoCol}</option>` + Array.from({length: width}, (_, c) => `<option value="${c}" ${c === sel ? 'selected' : ''}>${label(c)}</option>`).join('');
+  const left = S.quota ? Math.max(0, S.quota.limit - S.quota.spent).toFixed(2) : null;
+  let h = `<div class="card"><div class="hrow"><h2>${esc(T.bTitle(B.name))}</h2><button class="ghost" id="bclose">${T.bClose}</button></div>
+    <div class="bsum"><span><b>${ready}</b> ${T.bReady}</span><span><b>${have + done}</b> ${T.bHave}</span>${failed ? `<span><b>${failed}</b> ${T.bFail}</span>` : ''}<span><b>${skip}</b> ${T.bSkip}</span>${B.ignored ? `<span><b>${B.ignored}</b> ${T.bIgn}</span>` : ''}</div>
+    <div class="bmap"><label>${T.bName} <select id="bname">${opts(B.cols.name)}</select></label><label>${T.bFee} <select id="bfee">${opts(B.cols.fee)}</select></label></div>
+    <div class="bscroll"><table><thead><tr>${T.bHeads.map(x => '<th>' + x + '</th>').join('')}</tr></thead><tbody>` +
+    B.items.map(it => {
+      const v = it.id && D.videos.find(x => x.id === it.id), m = v && (it.status === 'done' || it.status === 'have') ? metrics(v, false) : null;
+      const name = B.cols.name >= 0 && String(B.aoa[it.row][B.cols.name] || '').trim() ? B.aoa[it.row][B.cols.name] : v ? v.channel : '';
+      const st = it.status === 'error' ? (T['e_' + it.err] || T.e_server_error) : T.bs[it.status];
+      return `<tr><td>${it.row + 1}</td><td>${esc(name)}</td><td class="u" title="${esc(it.url)}">${esc(it.url.replace(/^https?:\/\/(www\.)?/, ''))}</td><td class="st ${it.status}">${st}</td><td>${m ? pct(m.intent) : ''}</td></tr>`;
+    }).join('') + `</tbody></table></div>` +
+    (B.running || done || failed ? `<div class="prog"><i style="width:${total ? (done + failed) / total * 100 : 0}%"></i></div>` : '') +
+    `<div class="bbtns">` +
+    (B.running ? `<button class="btn" id="bstop" ${B.stop ? 'disabled' : ''}>${T.bStop}</button><span class="meta">${B.stop ? T.bStopping : ''}</span>`
+      : `<button class="btn" id="bstart" ${ready + failed && API ? '' : 'disabled'}>${ready || !failed ? T.bStart(ready) : T.bRetry(failed)}</button>`) +
+    `<button class="ghost" id="bexport" ${have + done ? '' : 'disabled'}>${T.bExport}</button>` +
+    (ready && !B.running ? `<span class="meta">${!API ? T.mLive : T.bCost(ready, left)}</span>` : '') + `</div></div>`;
+  el.innerHTML = h;
+}
+async function runBatch() {
+  if (B.running || !API) return;
+  B.items.forEach(i => { if (i.status === 'error') i.status = 'ready'; });
+  const queue = B.items.filter(i => i.status === 'ready'); let next = 0; if (!queue.length) return;
+  B.running = true; B.stop = false; renderBatch();
+  async function worker() {
+    while (!B.stop && next < queue.length) {
+      const it = queue[next++]; it.status = 'running'; renderBatch();
+      try { await analyseOne('https://www.youtube.com/watch?v=' + it.id); it.status = 'done'; applyFee(it); }
+      catch (e) { it.status = 'error'; it.err = e && e.code ? e.code : 'network'; if (['user_limit', 'daily_limit', 'need_password', 'bad_password', 'not_configured'].includes(it.err)) { B.stop = true; queue.slice(next).forEach(x => { x.status = 'error'; x.err = it.err; }); next = queue.length; } }
+      renderStatic(); renderCompare(); renderBatch();
+    }
+  }
+  await Promise.all([worker(), worker()]);
+  B.running = false; B.stop = false; if (!S.vid && D.videos[0]) S.vid = D.videos[0].id; render();
+}
+async function exportSheet() {
+  await loadXLSX();
+  if (API) await Promise.all(B.items.map(x => x.id && D.videos.find(v => v.id === x.id)).filter(Boolean).map(v => judgeFetch(JSON.stringify(judgeIn(v, metrics(v, false))))));
+  const aoa = B.aoa.map(r => r.slice()), width = Math.max(...aoa.map(r => r.length)); let h = B.header, shift = 0;
+  if (h < 0) { aoa.unshift([]); h = 0; shift = 1; }
+  aoa.forEach((row, i) => {
+    while (row.length < width) row.push('');
+    if (i === h) return row.push(...T.xHeads);
+    const its = B.items.filter(x => x.row === i - shift); if (!its.length) return;
+    const it = its.find(x => x.id && D.videos.some(v => v.id === x.id)) || its[0], v = it.id && D.videos.find(x => x.id === it.id);
+    const st = it.status === 'error' ? (T['e_' + it.err] || T.e_server_error) : T.bs[it.status];
+    if (!v) return row.push('', '', '', '', '', '', '', '', '', '', '', '', '', st);
+    const m = metrics(v, false), J = JUD[JSON.stringify(judgeIn(v, m))];
+    row.push(v.title, v.channel, v.views, isNaN(m.viewsPerSub) ? '' : +m.viewsPerSub.toFixed(2), pct(m.likeRate, 2), pct(m.relevance), pct(m.intent), pct(m.hesitant), m.bars[0] ? T.b[m.bars[0].key] : T.none,
+      pct(m.competitor), pct(m.adDislike), isNaN(cpm(v)) ? '' : +cpm(v).toFixed(2), verdict(v, m, J || null), T.bs.done);
+  });
+  const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(aoa), 'Hype HUD');
+  XLSX.writeFile(wb, 'hype-hud-' + (B.name || 'batch').replace(/[^\w一-龥-]+/g, '_') + '.xlsx');
+}
+document.getElementById('imp').addEventListener('click', () => document.getElementById('file').click());
+document.getElementById('file').addEventListener('change', e => { const f = e.target.files[0]; e.target.value = ''; if (f) readFile(f); });
+addEventListener('dragover', e => { e.preventDefault(); document.body.classList.add('drag'); });
+addEventListener('dragleave', e => { if (!e.relatedTarget) document.body.classList.remove('drag'); });
+addEventListener('drop', e => { e.preventDefault(); document.body.classList.remove('drag'); const f = e.dataTransfer && e.dataTransfer.files[0]; if (f) readFile(f); });
+function applyHash() {
+  const id = HASH.get('v'); if (!id || HASH.done || !D.videos.some(v => v.id === id)) return false;
+  HASH.done = true; S.vid = id; if (HASH.get('t')) S.tab = HASH.get('t'); const f = HASH.get('f'); if (f && f.includes(':')) { S.filter = {k: f.slice(0, f.indexOf(':')), v: f.slice(f.indexOf(':') + 1)}; S.tab = 'comments'; }
+  return true;
+}
+applyHash();
+if (API) fetch(API + '/api/featured').then(r => r.ok ? r.json() : []).then(list => {
+  let added = false; (list || []).forEach(v => { if (v && v.id && Array.isArray(v.comments) && !D.videos.some(x => x.id === v.id)) { D.videos.push(v); added = true; } });
+  if (added) { applyHash(); render(); }
+}).catch(() => {});
+if (API) fetch(API + '/api/quota').then(r => r.ok ? r.json() : null).then(q => { if (q && typeof q.limit === 'number') { S.quota = q; renderStatic(); } }).catch(() => {});
+document.getElementById('pwok').addEventListener('click', savePw);
+document.getElementById('pw').addEventListener('keydown', e => { if (e.key === 'Enter') savePw(); });
+document.getElementById('go').addEventListener('click', analyse);
+document.getElementById('url').addEventListener('keydown', e => { if (e.key === 'Enter') analyse(); });
+render();
+
+/* 背景：像素抖动的流动纹理 */
+(function () {
+  const cv = document.getElementById('code'); if (!cv || !cv.getContext) return;
+  const ctx = cv.getContext('2d'), CELL = 7, B = [0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
+  const still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let cols = 0, rows = 0, img = null, t = 0, last = 0;
+  function h(x, y) { let n = (Math.imul(x, 374761393) + Math.imul(y, 668265263)) | 0; n = Math.imul(n ^ (n >>> 13), 1274126177); return ((n ^ (n >>> 16)) >>> 0) / 4294967296; }
+  function noise(x, y) {
+    const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi, u = xf * xf * (3 - 2 * xf), w = yf * yf * (3 - 2 * yf);
+    const a = h(xi, yi), b = h(xi + 1, yi), c = h(xi, yi + 1), d = h(xi + 1, yi + 1);
+    return a + (b - a) * u + (c - a) * w + (a - b - c + d) * u * w;
+  }
+  function setup() { cols = Math.ceil(innerWidth / CELL); rows = Math.ceil(innerHeight / CELL); cv.width = cols; cv.height = rows; img = ctx.createImageData(cols, rows); draw(); }
+  function draw() {
+    const d = img.data, ca = Math.cos(-.5), sa = Math.sin(-.5);
+    for (let y = 0, p = 0; y < rows; y++) for (let x = 0; x < cols; x++, p += 4) {
+      const u = x * ca - y * sa, v = x * sa + y * ca;
+      let n = noise(u * .022 - t * .22, v * .085) * .62 + noise(u * .06 - t * .5, v * .2 + 9.3) * .38;
+      n = Math.max(0, Math.min(1, (n - .42) * 2.6));
+      const dx = Math.abs(x / cols - .5) * 2, edge = .04 + .96 * Math.max(0, Math.min(1, (dx - .62) * 3));
+      const val = n * edge, on = val * 16 > B[(x & 3) + (y & 3) * 4] + .5, g = on ? 60 + val * 150 : 0;
+      d[p] = d[p + 1] = d[p + 2] = g; d[p + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+  }
+  function tick(now) { if (now - last > 42) { t += Math.min((now - last) / 1000, .1) * .45; last = now; draw(); } requestAnimationFrame(tick); }
+  addEventListener('resize', setup); t = 3; setup();
+  if (!still) requestAnimationFrame(n => { last = n; requestAnimationFrame(tick); });
+})();
+</script>
+</body>
+</html>
